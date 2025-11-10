@@ -9,11 +9,19 @@ import { CategoryButtons } from './components/CategoryButtons'
 import { BackButton } from './components/BackButton'
 import { Modal } from './components/Modal'
 import './App.css'
+import ecosystemData from './data/monad_ecosystem.json'
 
 interface Project {
   id: string
   name: string
+  slug: string
+  project_type: string
   description: string
+  categories: string[]
+  logo: string
+  banner: string
+  site_link: string | null
+  social_links: string[]
   position: THREE.Vector3
 }
 
@@ -23,78 +31,55 @@ interface Category {
   projects: Project[]
 }
 
-const categories: Category[] = [
-  {
-    id: 'dex',
-    name: 'DEX',
-    projects: [
-      {
-        id: 'dex-1',
-        name: 'Uniswap',
-        description:
-          'A decentralized exchange protocol for automated liquidity provision.',
-        position: new THREE.Vector3(-2, 1, -5),
-      },
-      {
-        id: 'dex-2',
-        name: 'SushiSwap',
-        description:
-          'A community-driven decentralized exchange with yield farming.',
-        position: new THREE.Vector3(2, -1, -6),
-      },
-      {
-        id: 'dex-3',
-        name: 'Curve',
-        description: 'An exchange liquidity pool designed for stablecoins.',
-        position: new THREE.Vector3(0, 0, -7),
-      },
-    ],
-  },
-  {
-    id: 'nft',
-    name: 'NFT',
-    projects: [
-      {
-        id: 'nft-1',
-        name: 'OpenSea',
-        description:
-          'The largest NFT marketplace for buying and selling digital collectibles.',
-        position: new THREE.Vector3(-1.5, 0.5, -5),
-      },
-      {
-        id: 'nft-2',
-        name: 'Blur',
-        description: 'A fast NFT marketplace with advanced trading features.',
-        position: new THREE.Vector3(1.5, -0.5, -6),
-      },
-    ],
-  },
-  {
-    id: 'clobs',
-    name: 'CLOBs',
-    projects: [
-      {
-        id: 'clob-1',
-        name: 'dYdX',
-        description: 'A decentralized exchange for perpetual futures trading.',
-        position: new THREE.Vector3(0, 1.5, -5),
-      },
-      {
-        id: 'clob-2',
-        name: 'Orderly Network',
-        description: 'A decentralized order book protocol for DeFi trading.',
-        position: new THREE.Vector3(-1, -1, -6),
-      },
-      {
-        id: 'clob-3',
-        name: 'Vertex Protocol',
-        description:
-          'A unified trading platform combining spot and perpetuals.',
-        position: new THREE.Vector3(1.5, 0, -7),
-      },
-    ],
-  },
-]
+// Generate positions in a sphere around the camera
+function generatePositions(count: number): THREE.Vector3[] {
+  const positions: THREE.Vector3[] = []
+  const radius = 6
+  const goldenRatio = (1 + Math.sqrt(5)) / 2
+  const angleIncrement = Math.PI * 2 * goldenRatio
+
+  for (let i = 0; i < count; i++) {
+    const t = i / count
+    const inclination = Math.acos(1 - 2 * t)
+    const azimuth = angleIncrement * i
+
+    const x = radius * Math.sin(inclination) * Math.cos(azimuth)
+    const y = radius * Math.sin(inclination) * Math.sin(azimuth)
+    const z = radius * Math.cos(inclination) - 10
+
+    positions.push(new THREE.Vector3(x, y, z))
+  }
+
+  return positions
+}
+
+// Transform scraped data into categories
+const categories: Category[] = ecosystemData.categories.map((categoryName) => {
+  const categoryId = categoryName.toLowerCase().replace(/\s+/g, '-')
+  const categoryProjects = ecosystemData.projects.filter((proj) =>
+    proj.categories.includes(categoryName),
+  )
+
+  const positions = generatePositions(categoryProjects.length)
+
+  return {
+    id: categoryId,
+    name: categoryName,
+    projects: categoryProjects.map((proj, index) => ({
+      id: proj.slug,
+      name: proj.name,
+      slug: proj.slug,
+      project_type: proj.project_type,
+      description: proj.description,
+      categories: proj.categories,
+      logo: proj.logo,
+      banner: proj.banner,
+      site_link: proj.site_link,
+      social_links: proj.social_links,
+      position: positions[index],
+    })),
+  }
+})
 
 function App() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -103,8 +88,17 @@ function App() {
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [modalVisible, setModalVisible] = useState(false)
-  const [modalTitle, setModalTitle] = useState('Project')
-  const [modalText, setModalText] = useState('Description goes here.')
+  const [modalData, setModalData] = useState<{
+    title: string
+    text: string
+    logo?: string
+    banner?: string
+    siteLink?: string | null
+    socialLinks?: string[]
+  }>({
+    title: 'Project',
+    text: 'Description goes here.',
+  })
   const [selectedHotspotId, setSelectedHotspotId] = useState<string | null>(
     null,
   )
@@ -114,7 +108,14 @@ function App() {
     for (const category of categories) {
       const project = category.projects.find((p) => p.id === hotspotId)
       if (project) {
-        return { name: project.name, description: project.description }
+        return {
+          name: project.name,
+          description: project.description,
+          logo: project.logo,
+          banner: project.banner,
+          siteLink: project.site_link,
+          socialLinks: project.social_links,
+        }
       }
     }
     return null
@@ -134,8 +135,14 @@ function App() {
           return null
         }
         // Otherwise, show/update the modal
-        setModalTitle(projectData.name)
-        setModalText(projectData.description)
+        setModalData({
+          title: projectData.name,
+          text: projectData.description,
+          logo: projectData.logo,
+          banner: projectData.banner,
+          siteLink: projectData.siteLink,
+          socialLinks: projectData.socialLinks,
+        })
         setModalVisible(true)
         return hotspotId
       })
@@ -210,8 +217,12 @@ function App() {
       {selectedCategory && <BackButton onClick={handleBackToCategories} />}
       <Modal
         visible={modalVisible}
-        title={modalTitle}
-        text={modalText}
+        title={modalData.title}
+        text={modalData.text}
+        logo={modalData.logo}
+        banner={modalData.banner}
+        siteLink={modalData.siteLink}
+        socialLinks={modalData.socialLinks}
         onClose={() => {
           setModalVisible(false)
           setSelectedHotspotId(null)
