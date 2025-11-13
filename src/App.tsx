@@ -5,6 +5,7 @@ import { useNFTs } from './hooks/useNFTs'
 import { useHotspots } from './hooks/useHotspots'
 import { useSingleNFTBackground } from './hooks/useSingleNFTBackground'
 import { useBirdsBackground } from './hooks/useBirdsBackground'
+import { useParticlesBackground } from './hooks/useParticlesBackground'
 import { useCategoryNavigation } from './hooks/useCategoryNavigation'
 import { CategoryButtons } from './components/CategoryButtons'
 import { BackButton } from './components/BackButton'
@@ -174,6 +175,13 @@ function App() {
     rendererRef,
     mouseXRef,
     mouseYRef,
+  })
+
+  // Particle cloud background
+  useParticlesBackground({
+    sceneRef,
+    cameraRef,
+    rendererRef,
   })
 
   // NFT loading and management
