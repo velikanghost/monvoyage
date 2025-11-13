@@ -4,6 +4,7 @@ import { useThreeScene } from './hooks/useThreeScene'
 import { useNFTs } from './hooks/useNFTs'
 import { useHotspots } from './hooks/useHotspots'
 import { useSingleNFTBackground } from './hooks/useSingleNFTBackground'
+import { useBirdsBackground } from './hooks/useBirdsBackground'
 import { useCategoryNavigation } from './hooks/useCategoryNavigation'
 import { CategoryButtons } from './components/CategoryButtons'
 import { BackButton } from './components/BackButton'
@@ -84,7 +85,7 @@ const categories: Category[] = ecosystemData.categories.map((categoryName) => {
 function App() {
   const containerRef = useRef<HTMLDivElement>(null)
   const categoryButtonsRef = useRef<HTMLDivElement>(null)
-  const materialRef = useRef<THREE.PointsMaterial | null>(null)
+  const materialRef = useRef<THREE.PointsMaterial | null>(null) // Kept for compatibility
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [modalVisible, setModalVisible] = useState(false)
@@ -151,13 +152,29 @@ function App() {
   )
 
   // Three.js scene setup
-  const { sceneRef, cameraRef, hotspotMeshesRef, selectedHotspotIdRef } =
-    useThreeScene({
-      containerRef,
-      materialRef,
-      selectedCategory,
-      onHotspotClick: handleHotspotClick,
-    })
+  const {
+    sceneRef,
+    cameraRef,
+    rendererRef,
+    hotspotMeshesRef,
+    selectedHotspotIdRef,
+    mouseXRef,
+    mouseYRef,
+  } = useThreeScene({
+    containerRef,
+    materialRef,
+    selectedCategory,
+    onHotspotClick: handleHotspotClick,
+  })
+
+  // Birds flocking background
+  useBirdsBackground({
+    sceneRef,
+    cameraRef,
+    rendererRef,
+    mouseXRef,
+    mouseYRef,
+  })
 
   // NFT loading and management
   const { nftSvg } = useNFTs()
@@ -183,7 +200,7 @@ function App() {
   const { handleCategorySelect, handleBackToCategories } =
     useCategoryNavigation({
       cameraRef,
-      materialRef,
+      materialRef, // Still needed for category navigation transitions
       categoryButtonsRef,
       onCategorySelect: (categoryId: string) => {
         setSelectedCategory(categoryId)
