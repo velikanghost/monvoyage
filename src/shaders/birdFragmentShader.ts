@@ -5,14 +5,15 @@ varying float z;
 uniform vec3 color;
 
 void main() {
-  // Purple themed birds for dark background
-  float z2 = 0.3 + ( 1000. - z ) / 1000. * vColor.x * 0.5;
+  // Depth-based shading like reference, but with purple tones
+  float z2 = 0.2 + ( 1000. - z ) / 1000. * vColor.x;
   
-  // Purple color: mix between dark purple and lighter purple based on depth
-  float purpleR = 0.4 + z2 * 0.3; // 0.4 to 0.7 (purple-red component)
-  float purpleG = 0.2 + z2 * 0.2; // 0.2 to 0.4 (purple-green component)  
-  float purpleB = 0.6 + z2 * 0.4; // 0.6 to 1.0 (purple-blue component)
+  // Purple color scheme: adjust the base purple color based on depth
+  // Base purple is around (0.5, 0.3, 0.95)
+  float purpleR = z2 * 0.5;
+  float purpleG = z2 * 0.3;
+  float purpleB = z2 * 0.95;
   
-  gl_FragColor = vec4( purpleR, purpleG, purpleB, 0.7 + z2 * 0.3 );
+  gl_FragColor = vec4( purpleR, purpleG, purpleB, 1. );
 }
 `

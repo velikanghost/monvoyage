@@ -82,7 +82,7 @@ class BirdGeometry extends THREE.BufferGeometry {
       birdVertex.array[v] = v % 9
     }
 
-    this.scale(0.1, 0.1, 0.1) // Reduced size for background effect
+    this.scale(0.2, 0.2, 0.2)
   }
 }
 
@@ -195,16 +195,12 @@ export function useBirdsBackground({
       vertexShader: birdVertexShader,
       fragmentShader: birdFragmentShader,
       side: THREE.DoubleSide,
-      depthTest: false, // Don't test depth - always render
-      depthWrite: false, // Don't write to depth buffer
-      transparent: true, // Allow transparency
     })
 
     const birdMesh = new THREE.Mesh(geometry, material)
     birdMesh.rotation.y = Math.PI / 2
     birdMesh.matrixAutoUpdate = false
     birdMesh.updateMatrix()
-    birdMesh.renderOrder = -10 // Render at the very back, behind everything
     birdMeshRef.current = birdMesh
 
     scene.add(birdMesh)
@@ -332,8 +328,7 @@ function fillPositionTexture(texture: THREE.DataTexture) {
   for (let k = 0, kl = theArray.length; k < kl; k += 4) {
     const x = Math.random() * BOUNDS - BOUNDS_HALF
     const y = Math.random() * BOUNDS - BOUNDS_HALF
-    // Position birds further back in Z space for true background effect
-    const z = Math.random() * BOUNDS - BOUNDS_HALF - 20
+    const z = Math.random() * BOUNDS - BOUNDS_HALF
 
     theArray[k + 0] = x
     theArray[k + 1] = y
@@ -351,13 +346,13 @@ function fillVelocityTexture(texture: THREE.DataTexture) {
   }
 
   for (let k = 0, kl = theArray.length; k < kl; k += 4) {
-    const x = (Math.random() - 0.5) * 10
-    const y = (Math.random() - 0.5) * 10
-    const z = (Math.random() - 0.5) * 10
+    const x = Math.random() - 0.5
+    const y = Math.random() - 0.5
+    const z = Math.random() - 0.5
 
-    theArray[k + 0] = x
-    theArray[k + 1] = y
-    theArray[k + 2] = z
+    theArray[k + 0] = x * 10
+    theArray[k + 1] = y * 10
+    theArray[k + 2] = z * 10
     theArray[k + 3] = 1
   }
 }
