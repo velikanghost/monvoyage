@@ -14,7 +14,7 @@ interface UseBirdsBackgroundProps {
   mouseYRef: React.MutableRefObject<number>
 }
 
-const WIDTH = 32
+const WIDTH = 22
 const BIRDS = WIDTH * WIDTH
 const BOUNDS = 800
 const BOUNDS_HALF = BOUNDS / 2
@@ -52,16 +52,16 @@ class BirdGeometry extends THREE.BufferGeometry {
       }
     }
 
-    const wingsSpan = 20
+    const wingsSpan = 10
 
     for (let f = 0; f < BIRDS; f++) {
       // Body
-      verts_push(0, -0, -20, 0, 4, -20, 0, 0, 30)
+      verts_push(0, -0, -15, 0, 4, -15, 0, 0, 30)
 
       // Wings
-      verts_push(0, 0, -15, -wingsSpan, 0, 0, 0, 0, 15)
+      verts_push(0, 0, -10, -wingsSpan, 0, 0, 0, 0, 10)
 
-      verts_push(0, 0, 15, wingsSpan, 0, 0, 0, 0, -15)
+      verts_push(0, 0, 10, wingsSpan, 0, 0, 0, 0, -10)
     }
 
     for (let v = 0; v < triangles * 3; v++) {
@@ -82,7 +82,7 @@ class BirdGeometry extends THREE.BufferGeometry {
       birdVertex.array[v] = v % 9
     }
 
-    this.scale(0.2, 0.2, 0.2)
+    this.scale(0.1, 0.1, 0.1)
   }
 }
 

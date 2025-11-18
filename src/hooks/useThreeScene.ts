@@ -6,6 +6,7 @@ interface UseThreeSceneProps {
   materialRef: React.MutableRefObject<THREE.PointsMaterial | null>
   selectedCategory: string | null
   onHotspotClick?: (hotspotId: string) => void
+  backgroundColor?: number
 }
 
 export function useThreeScene({
@@ -13,6 +14,7 @@ export function useThreeScene({
   materialRef,
   selectedCategory,
   onHotspotClick,
+  backgroundColor = 0x0b0a0f,
 }: UseThreeSceneProps) {
   const sceneRef = useRef<THREE.Scene | null>(null)
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null)
@@ -44,7 +46,7 @@ export function useThreeScene({
 
     const renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setClearColor(0x0b0a0f)
+    renderer.setClearColor(backgroundColor)
     containerRef.current.appendChild(renderer.domElement)
     rendererRef.current = renderer
 
@@ -129,6 +131,13 @@ export function useThreeScene({
       })
     }
   }, [containerRef, materialRef, onHotspotClick])
+
+  // Update background color when it changes (without recreating the scene)
+  useEffect(() => {
+    if (rendererRef.current) {
+      rendererRef.current.setClearColor(backgroundColor)
+    }
+  }, [backgroundColor])
 
   useEffect(() => {
     selectedCategoryRef.current = selectedCategory

@@ -10,6 +10,8 @@ import { useCategoryNavigation } from './hooks/useCategoryNavigation'
 import { CategoryButtons } from './components/CategoryButtons'
 import { BackButton } from './components/BackButton'
 import { Modal } from './components/Modal'
+import { Navbar } from './components/Navbar'
+import { useThemeStore, themeColors } from './stores/themeStore'
 import './App.css'
 import ecosystemData from './data/monad_ecosystem.json'
 
@@ -87,6 +89,9 @@ function App() {
   const containerRef = useRef<HTMLDivElement>(null)
   const categoryButtonsRef = useRef<HTMLDivElement>(null)
   const materialRef = useRef<THREE.PointsMaterial | null>(null) // Kept for compatibility
+
+  const { theme } = useThemeStore()
+  const colors = themeColors[theme]
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [modalVisible, setModalVisible] = useState(false)
@@ -166,6 +171,7 @@ function App() {
     materialRef,
     selectedCategory,
     onHotspotClick: handleHotspotClick,
+    backgroundColor: colors.background,
   })
 
   // Birds flocking background
@@ -233,6 +239,7 @@ function App() {
 
   return (
     <>
+      <Navbar />
       <div ref={containerRef} />
       <CategoryButtons
         ref={categoryButtonsRef}
