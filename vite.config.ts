@@ -10,5 +10,14 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    proxy: {
+      '/api/indexer': {
+        target: 'https://indexer.dev.hyperindex.xyz/7a6859e/v1/graphql',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/indexer/, ''),
+        secure: false,
+      },
+    },
+  },
 })
-

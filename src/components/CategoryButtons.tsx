@@ -1,4 +1,5 @@
 import { forwardRef } from 'react'
+import ScrollingCategories from './ScrollingCategories'
 
 interface Category {
   id: string
@@ -14,15 +15,7 @@ export const CategoryButtons = forwardRef<HTMLDivElement, CategoryButtonsProps>(
   ({ categories, onSelect }, ref) => {
     return (
       <div ref={ref} className="categoryButtons">
-        {categories.map((category) => (
-          <button
-            key={category.id}
-            className="categoryBtn"
-            onClick={() => onSelect(category.id)}
-          >
-            {category.name}
-          </button>
-        ))}
+        <ScrollingCategories categories={categories} onSelect={onSelect} />
       </div>
     )
   },

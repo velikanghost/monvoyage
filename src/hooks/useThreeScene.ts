@@ -6,6 +6,7 @@ interface UseThreeSceneProps {
   materialRef: React.MutableRefObject<THREE.PointsMaterial | null>
   selectedCategory: string | null
   onHotspotClick?: (hotspotId: string) => void
+  backgroundColor?: number
 }
 
 export function useThreeScene({
@@ -13,21 +14,26 @@ export function useThreeScene({
   materialRef,
   selectedCategory,
   onHotspotClick,
+  backgroundColor = 0x0b0a0f,
 }: UseThreeSceneProps) {
   const sceneRef = useRef<THREE.Scene | null>(null)
   const cameraRef = useRef<THREE.PerspectiveCamera | null>(null)
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null)
-  const pointsRef = useRef<THREE.Points | null>(null)
-  const geometryRef = useRef<THREE.BufferGeometry | null>(null)
   const hotspotMeshesRef = useRef<THREE.Mesh[]>([])
   const raycasterRef = useRef<THREE.Raycaster | null>(null)
   const mouseRef = useRef(new THREE.Vector2())
   const mouseXRef = useRef(0)
   const mouseYRef = useRef(0)
-  const clockRef = useRef(new THREE.Clock())
   const animationFrameRef = useRef<number | null>(null)
   const selectedHotspotIdRef = useRef<string | null>(null)
   const selectedCategoryRef = useRef<string | null>(null)
+  const activeKeysRef = useRef<Set<string>>(new Set())
+  const panOffsetRef = useRef(new THREE.Vector2(0, 0))
+  const zoomRef = useRef(10)
+  const zoomSmoothRef = useRef(10)
+  const zoomBoundsRef = useRef({ min: 6.5, max: 13 })
+  const baseZoomRef = useRef(10)
+  const hasUserZoomedRef = useRef(false)
 
   useEffect(() => {
     if (!containerRef.current) return
@@ -37,79 +43,19 @@ export function useThreeScene({
     sceneRef.current = scene
 
     const camera = new THREE.PerspectiveCamera(
-      75,
+      60,
       window.innerWidth / window.innerHeight,
       0.1,
       100,
     )
-    camera.position.set(0, 0, 8)
+    camera.position.set(0, 0, 10)
     cameraRef.current = camera
 
     const renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setClearColor(0x0b0a0f)
+    renderer.setClearColor(backgroundColor)
     containerRef.current.appendChild(renderer.domElement)
     rendererRef.current = renderer
-
-    // Point cloud background with exclusion zone
-    const count = 12000
-    const geometry = new THREE.BufferGeometry()
-    const positions = new Float32Array(count * 3)
-    const colors = new Float32Array(count * 3)
-    const color = new THREE.Color()
-
-    const exclusionRadius = 0.12
-    let particleCount = 0
-    let attempts = 0
-    const maxAttempts = count * 10
-
-    while (particleCount < count && attempts < maxAttempts) {
-      attempts++
-      const x = (Math.random() - 0.5) * 20
-      const y = (Math.random() - 0.5) * 10
-      const z = (Math.random() - 0.5) * 20
-
-      const distanceFromCenter = Math.sqrt(x * x + y * y)
-      if (distanceFromCenter < exclusionRadius) {
-        continue
-      }
-
-      const i3 = particleCount * 3
-      positions[i3] = x
-      positions[i3 + 1] = y
-      positions[i3 + 2] = z
-      color.setHSL(0.35 + z / 50, 0.6, 0.5 + z / 80)
-      colors[i3] = color.r
-      colors[i3 + 1] = color.g
-      colors[i3 + 2] = color.b
-      particleCount++
-    }
-
-    const actualPositions = new Float32Array(particleCount * 3)
-    const actualColors = new Float32Array(particleCount * 3)
-    actualPositions.set(positions.subarray(0, particleCount * 3))
-    actualColors.set(colors.subarray(0, particleCount * 3))
-
-    geometry.setAttribute(
-      'position',
-      new THREE.BufferAttribute(actualPositions, 3),
-    )
-    geometry.setAttribute('color', new THREE.BufferAttribute(actualColors, 3))
-    geometryRef.current = geometry
-
-    const material = new THREE.PointsMaterial({
-      size: 0.05,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.9,
-      blending: THREE.AdditiveBlending,
-    })
-    materialRef.current = material
-
-    const points = new THREE.Points(geometry, material)
-    points.renderOrder = 0
-    scene.add(points)
-    pointsRef.current = points
 
     // Raycaster
     const raycaster = new THREE.Raycaster()
@@ -153,21 +99,109 @@ export function useThreeScene({
       renderer.setSize(window.innerWidth, window.innerHeight)
     }
 
+    // Keyboard handlers for panning
+    const trackableKeys = new Set([
+      'ArrowUp',
+      'ArrowDown',
+      'ArrowLeft',
+      'ArrowRight',
+    ])
+    const panBounds = { x: 7, y: 5 }
+    const panSpeed = 0.15
+    const zoomStep = 0.5
+    const zoomInKeys = new Set(['=', '+', 'PageUp'])
+    const zoomOutKeys = new Set(['-', '_', 'PageDown'])
+    const clampZoom = (value: number) =>
+      THREE.MathUtils.clamp(
+        value,
+        zoomBoundsRef.current.min,
+        zoomBoundsRef.current.max,
+      )
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (trackableKeys.has(e.key)) {
+        e.preventDefault()
+        activeKeysRef.current.add(e.key)
+        return
+      }
+
+      if (zoomInKeys.has(e.key)) {
+        e.preventDefault()
+        hasUserZoomedRef.current = true
+        zoomRef.current = clampZoom(zoomRef.current - zoomStep)
+        return
+      }
+
+      if (zoomOutKeys.has(e.key)) {
+        e.preventDefault()
+        hasUserZoomedRef.current = true
+        zoomRef.current = clampZoom(zoomRef.current + zoomStep)
+      }
+    }
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (!trackableKeys.has(e.key)) return
+      e.preventDefault()
+      activeKeysRef.current.delete(e.key)
+    }
+
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault()
+      const delta = e.deltaY * 0.004
+      hasUserZoomedRef.current = true
+      zoomRef.current = clampZoom(zoomRef.current + delta)
+    }
+
     // Animation loop
     const animate = () => {
       animationFrameRef.current = requestAnimationFrame(animate)
-      const t = clockRef.current.getElapsedTime()
-      const pos = geometry.attributes.position.array as Float32Array
-      const actualCount = pos.length / 3
-      for (let i = 0; i < actualCount; i++) {
-        const i3 = i * 3
-        pos[i3 + 1] += Math.sin(t * 0.5 + pos[i3] * 0.3) * 0.0005
-      }
-      geometry.attributes.position.needsUpdate = true
 
       camera.position.x += (mouseXRef.current * 0.5 - camera.position.x) * 0.05
       camera.position.y += (-mouseYRef.current * 0.3 - camera.position.y) * 0.05
-      points.rotation.y += 0.0006
+
+      const horizontalInput =
+        (activeKeysRef.current.has('ArrowRight') ? 1 : 0) -
+        (activeKeysRef.current.has('ArrowLeft') ? 1 : 0)
+      const verticalInput =
+        (activeKeysRef.current.has('ArrowUp') ? 1 : 0) -
+        (activeKeysRef.current.has('ArrowDown') ? 1 : 0)
+
+      if (horizontalInput !== 0 || verticalInput !== 0) {
+        panOffsetRef.current.x = THREE.MathUtils.clamp(
+          panOffsetRef.current.x + horizontalInput * panSpeed,
+          -panBounds.x,
+          panBounds.x,
+        )
+        panOffsetRef.current.y = THREE.MathUtils.clamp(
+          panOffsetRef.current.y + verticalInput * panSpeed,
+          -panBounds.y,
+          panBounds.y,
+        )
+      }
+
+      const targetX = panOffsetRef.current.x + mouseXRef.current * 2
+      const targetY = panOffsetRef.current.y + -mouseYRef.current * 1.2
+
+      camera.position.x += (targetX - camera.position.x) * 0.07
+      camera.position.y += (targetY - camera.position.y) * 0.07
+      if (!hasUserZoomedRef.current) {
+        zoomRef.current = camera.position.z
+        zoomSmoothRef.current = camera.position.z
+      } else {
+        zoomSmoothRef.current += (zoomRef.current - zoomSmoothRef.current) * 0.1
+      }
+      camera.position.z += (zoomSmoothRef.current - camera.position.z) * 0.08
+
+      camera.position.x = THREE.MathUtils.clamp(
+        camera.position.x,
+        -panBounds.x - 1,
+        panBounds.x + 1,
+      )
+      camera.position.y = THREE.MathUtils.clamp(
+        camera.position.y,
+        -panBounds.y - 1,
+        panBounds.y + 1,
+      )
 
       hotspotMeshesRef.current.forEach((h) => h.lookAt(camera.position))
 
@@ -178,12 +212,18 @@ export function useThreeScene({
     window.addEventListener('click', handleClick)
     window.addEventListener('mousemove', handleMouseMove)
     window.addEventListener('resize', handleResize)
+    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('keyup', handleKeyUp)
+    window.addEventListener('wheel', handleWheel, { passive: false })
 
     // Cleanup
     return () => {
       window.removeEventListener('click', handleClick)
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('resize', handleResize)
+      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('keyup', handleKeyUp)
+      window.removeEventListener('wheel', handleWheel)
       if (animationFrameRef.current !== null) {
         cancelAnimationFrame(animationFrameRef.current)
       }
@@ -191,8 +231,6 @@ export function useThreeScene({
         containerRef.current.removeChild(renderer.domElement)
       }
       renderer.dispose()
-      geometry.dispose()
-      material.dispose()
       hotspotMeshesRef.current.forEach((mesh) => {
         mesh.geometry.dispose()
         if (Array.isArray(mesh.material)) {
@@ -204,17 +242,38 @@ export function useThreeScene({
     }
   }, [containerRef, materialRef, onHotspotClick])
 
+  // Update background color when it changes (without recreating the scene)
+  useEffect(() => {
+    if (rendererRef.current) {
+      rendererRef.current.setClearColor(backgroundColor)
+    }
+  }, [backgroundColor])
+
   useEffect(() => {
     selectedCategoryRef.current = selectedCategory
+    hasUserZoomedRef.current = false
+
+    const baseZoom = selectedCategory ? -3 : 8
+    baseZoomRef.current = baseZoom
+
+    const bounds = selectedCategory
+      ? { min: baseZoom - 2.5, max: baseZoom + 6 }
+      : { min: baseZoom - 5, max: baseZoom + 10 }
+
+    zoomBoundsRef.current = bounds
+
+    const clamped = THREE.MathUtils.clamp(baseZoom, bounds.min, bounds.max)
+    zoomRef.current = clamped
+    zoomSmoothRef.current = clamped
   }, [selectedCategory])
 
   return {
     sceneRef,
     cameraRef,
     rendererRef,
-    pointsRef,
-    geometryRef,
     hotspotMeshesRef,
     selectedHotspotIdRef,
+    mouseXRef,
+    mouseYRef,
   }
 }

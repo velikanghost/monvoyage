@@ -5,6 +5,6 @@ export const web3config = {
   chainRpcUrl: import.meta.env.VITE_RPC_URL || 'https://testnet-rpc.monad.xyz',
   chainExplorerUrl: 'https://testnet.monadexplorer.com/',
   // Add indexer configuration
-  indexerApiUrl:
-    import.meta.env.VITE_INDEXER_API_URL || 'https://your-indexer-api.com',
+  // Use proxy to avoid CORS issues
+  indexerApiUrl: import.meta.env.VITE_INDEXER_API_URL || '/api/indexer',
 } as const

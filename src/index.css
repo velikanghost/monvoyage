@@ -1,5 +1,49 @@
 @import 'tailwindcss';
 
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-x-reverse {
+  from {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes marquee-y {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
+}
+
+@theme {
+  --animate-marquee-horizontal: marquee-x var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-y var(--duration) linear infinite;
+}
+
+.animate-marquee-horizontal {
+  animation: marquee-x var(--duration) infinite linear;
+}
+
+.animate-marquee-horizontal.reverse {
+  animation: marquee-x-reverse var(--duration) infinite linear;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-y var(--duration) linear infinite;
+}
+
 :root {
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
