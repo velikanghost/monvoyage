@@ -27,6 +27,13 @@ export function useThreeScene({
   const animationFrameRef = useRef<number | null>(null)
   const selectedHotspotIdRef = useRef<string | null>(null)
   const selectedCategoryRef = useRef<string | null>(null)
+  const activeKeysRef = useRef<Set<string>>(new Set())
+  const panOffsetRef = useRef(new THREE.Vector2(0, 0))
+  const zoomRef = useRef(10)
+  const zoomSmoothRef = useRef(10)
+  const zoomBoundsRef = useRef({ min: 6.5, max: 13 })
+  const baseZoomRef = useRef(10)
+  const hasUserZoomedRef = useRef(false)
 
   useEffect(() => {
     if (!containerRef.current) return
@@ -36,12 +43,12 @@ export function useThreeScene({
     sceneRef.current = scene
 
     const camera = new THREE.PerspectiveCamera(
-      75,
+      60,
       window.innerWidth / window.innerHeight,
       0.1,
       100,
     )
-    camera.position.set(0, 0, 8)
+    camera.position.set(0, 0, 10)
     cameraRef.current = camera
 
     const renderer = new THREE.WebGLRenderer({ antialias: true })
@@ -92,12 +99,109 @@ export function useThreeScene({
       renderer.setSize(window.innerWidth, window.innerHeight)
     }
 
+    // Keyboard handlers for panning
+    const trackableKeys = new Set([
+      'ArrowUp',
+      'ArrowDown',
+      'ArrowLeft',
+      'ArrowRight',
+    ])
+    const panBounds = { x: 7, y: 5 }
+    const panSpeed = 0.15
+    const zoomStep = 0.5
+    const zoomInKeys = new Set(['=', '+', 'PageUp'])
+    const zoomOutKeys = new Set(['-', '_', 'PageDown'])
+    const clampZoom = (value: number) =>
+      THREE.MathUtils.clamp(
+        value,
+        zoomBoundsRef.current.min,
+        zoomBoundsRef.current.max,
+      )
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (trackableKeys.has(e.key)) {
+        e.preventDefault()
+        activeKeysRef.current.add(e.key)
+        return
+      }
+
+      if (zoomInKeys.has(e.key)) {
+        e.preventDefault()
+        hasUserZoomedRef.current = true
+        zoomRef.current = clampZoom(zoomRef.current - zoomStep)
+        return
+      }
+
+      if (zoomOutKeys.has(e.key)) {
+        e.preventDefault()
+        hasUserZoomedRef.current = true
+        zoomRef.current = clampZoom(zoomRef.current + zoomStep)
+      }
+    }
+
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (!trackableKeys.has(e.key)) return
+      e.preventDefault()
+      activeKeysRef.current.delete(e.key)
+    }
+
+    const handleWheel = (e: WheelEvent) => {
+      e.preventDefault()
+      const delta = e.deltaY * 0.004
+      hasUserZoomedRef.current = true
+      zoomRef.current = clampZoom(zoomRef.current + delta)
+    }
+
     // Animation loop
     const animate = () => {
       animationFrameRef.current = requestAnimationFrame(animate)
 
       camera.position.x += (mouseXRef.current * 0.5 - camera.position.x) * 0.05
       camera.position.y += (-mouseYRef.current * 0.3 - camera.position.y) * 0.05
+
+      const horizontalInput =
+        (activeKeysRef.current.has('ArrowRight') ? 1 : 0) -
+        (activeKeysRef.current.has('ArrowLeft') ? 1 : 0)
+      const verticalInput =
+        (activeKeysRef.current.has('ArrowUp') ? 1 : 0) -
+        (activeKeysRef.current.has('ArrowDown') ? 1 : 0)
+
+      if (horizontalInput !== 0 || verticalInput !== 0) {
+        panOffsetRef.current.x = THREE.MathUtils.clamp(
+          panOffsetRef.current.x + horizontalInput * panSpeed,
+          -panBounds.x,
+          panBounds.x,
+        )
+        panOffsetRef.current.y = THREE.MathUtils.clamp(
+          panOffsetRef.current.y + verticalInput * panSpeed,
+          -panBounds.y,
+          panBounds.y,
+        )
+      }
+
+      const targetX = panOffsetRef.current.x + mouseXRef.current * 2
+      const targetY = panOffsetRef.current.y + -mouseYRef.current * 1.2
+
+      camera.position.x += (targetX - camera.position.x) * 0.07
+      camera.position.y += (targetY - camera.position.y) * 0.07
+      if (!hasUserZoomedRef.current) {
+        zoomRef.current = camera.position.z
+        zoomSmoothRef.current = camera.position.z
+      } else {
+        zoomSmoothRef.current += (zoomRef.current - zoomSmoothRef.current) * 0.1
+      }
+      camera.position.z += (zoomSmoothRef.current - camera.position.z) * 0.08
+
+      camera.position.x = THREE.MathUtils.clamp(
+        camera.position.x,
+        -panBounds.x - 1,
+        panBounds.x + 1,
+      )
+      camera.position.y = THREE.MathUtils.clamp(
+        camera.position.y,
+        -panBounds.y - 1,
+        panBounds.y + 1,
+      )
 
       hotspotMeshesRef.current.forEach((h) => h.lookAt(camera.position))
 
@@ -108,12 +212,18 @@ export function useThreeScene({
     window.addEventListener('click', handleClick)
     window.addEventListener('mousemove', handleMouseMove)
     window.addEventListener('resize', handleResize)
+    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener('keyup', handleKeyUp)
+    window.addEventListener('wheel', handleWheel, { passive: false })
 
     // Cleanup
     return () => {
       window.removeEventListener('click', handleClick)
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('resize', handleResize)
+      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('keyup', handleKeyUp)
+      window.removeEventListener('wheel', handleWheel)
       if (animationFrameRef.current !== null) {
         cancelAnimationFrame(animationFrameRef.current)
       }
@@ -141,6 +251,20 @@ export function useThreeScene({
 
   useEffect(() => {
     selectedCategoryRef.current = selectedCategory
+    hasUserZoomedRef.current = false
+
+    const baseZoom = selectedCategory ? -3 : 8
+    baseZoomRef.current = baseZoom
+
+    const bounds = selectedCategory
+      ? { min: baseZoom - 2.5, max: baseZoom + 6 }
+      : { min: baseZoom - 5, max: baseZoom + 10 }
+
+    zoomBoundsRef.current = bounds
+
+    const clamped = THREE.MathUtils.clamp(baseZoom, bounds.min, bounds.max)
+    zoomRef.current = clamped
+    zoomSmoothRef.current = clamped
   }, [selectedCategory])
 
   return {

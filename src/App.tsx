@@ -8,7 +8,6 @@ import { useBirdsBackground } from './hooks/useBirdsBackground'
 import { useParticlesBackground } from './hooks/useParticlesBackground'
 import { useCategoryNavigation } from './hooks/useCategoryNavigation'
 import { CategoryButtons } from './components/CategoryButtons'
-import { BackButton } from './components/BackButton'
 import { Modal } from './components/Modal'
 import { Navbar } from './components/Navbar'
 import { useThemeStore, themeColors } from './stores/themeStore'
@@ -35,24 +34,90 @@ interface Category {
   projects: Project[]
 }
 
+function relaxPositions(
+  positions: THREE.Vector3[],
+  {
+    minDistance = 1.4,
+    iterations = 4,
+    maxHorizontalSpread = 6,
+    depthBounds = { min: -12, max: -7 },
+  }: {
+    minDistance?: number
+    iterations?: number
+    maxHorizontalSpread?: number
+    depthBounds?: { min: number; max: number }
+  },
+) {
+  for (let iteration = 0; iteration < iterations; iteration++) {
+    for (let i = 0; i < positions.length; i++) {
+      for (let j = i + 1; j < positions.length; j++) {
+        const dir = positions[i].clone().sub(positions[j])
+        const distance = dir.length()
+        if (distance < minDistance && distance > 0) {
+          const push = (minDistance - distance) / 2
+          dir.normalize()
+          positions[i].addScaledVector(dir, push)
+          positions[j].addScaledVector(dir, -push)
+        }
+      }
+
+      positions[i].x = THREE.MathUtils.clamp(
+        positions[i].x,
+        -maxHorizontalSpread,
+        maxHorizontalSpread,
+      )
+      positions[i].y = THREE.MathUtils.clamp(
+        positions[i].y,
+        -maxHorizontalSpread,
+        maxHorizontalSpread,
+      )
+      positions[i].z = THREE.MathUtils.clamp(
+        positions[i].z,
+        depthBounds.min,
+        depthBounds.max,
+      )
+    }
+  }
+}
+
 // Generate positions in a sphere around the camera
 function generatePositions(count: number): THREE.Vector3[] {
   const positions: THREE.Vector3[] = []
-  const radius = 6
+
+  // Dynamically adjust radius based on number of projects
+  // More projects = slightly larger radius to avoid overlap
+  // But keep it constrained to fit in viewport
+  const baseRadius = 4
+  const radiusMultiplier = Math.min(
+    1 + Math.log10(Math.max(count, 1)) * 0.2,
+    1.8,
+  )
+  const radius = baseRadius * radiusMultiplier
+
   const goldenRatio = (1 + Math.sqrt(5)) / 2
   const angleIncrement = Math.PI * 2 * goldenRatio
+  const depthOffset = 8
+  const depthBounds = { min: -12, max: -7 }
 
   for (let i = 0; i < count; i++) {
-    const t = i / count
+    const t = i / Math.max(count, 1)
     const inclination = Math.acos(1 - 2 * t)
     const azimuth = angleIncrement * i
 
     const x = radius * Math.sin(inclination) * Math.cos(azimuth)
     const y = radius * Math.sin(inclination) * Math.sin(azimuth)
-    const z = radius * Math.cos(inclination) - 10
+    const rawZ = radius * Math.cos(inclination) - depthOffset
+    const z = THREE.MathUtils.clamp(rawZ, depthBounds.min, depthBounds.max)
 
     positions.push(new THREE.Vector3(x, y, z))
   }
+
+  relaxPositions(positions, {
+    minDistance: 1.5,
+    iterations: 5,
+    maxHorizontalSpread: radius * 1.2,
+    depthBounds,
+  })
 
   return positions
 }
@@ -197,6 +262,7 @@ function App() {
   useHotspots({
     sceneRef,
     cameraRef,
+    rendererRef,
     hotspotMeshesRef,
     selectedCategory,
     categories,
@@ -239,14 +305,16 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar
+        showBackButton={!!selectedCategory}
+        onBackClick={handleBackToCategories}
+      />
       <div ref={containerRef} />
       <CategoryButtons
         ref={categoryButtonsRef}
         categories={categories}
         onSelect={handleCategorySelect}
       />
-      {selectedCategory && <BackButton onClick={handleBackToCategories} />}
       <Modal
         visible={modalVisible}
         title={modalData.title}
