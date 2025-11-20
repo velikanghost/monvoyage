@@ -1,3 +1,5 @@
+import { useThemeStore, themeColors } from '../stores/themeStore'
+
 interface ModalProps {
   visible: boolean
   title: string
@@ -19,94 +21,116 @@ export function Modal({
   socialLinks = [],
   onClose,
 }: ModalProps) {
-  if (!visible) return null
+  const { theme } = useThemeStore()
+  const colors = themeColors[theme]
 
   return (
-    <div className="modal show">
-      <button className="closeModal" onClick={onClose}>
-        ×
-      </button>
-      {banner && (
-        <img
-          src={banner}
-          alt={`${title} banner`}
-          className="modalBanner"
-          style={{
-            width: '100%',
-            height: '120px',
-            objectFit: 'cover',
-            borderRadius: '8px',
-            marginBottom: '16px',
-          }}
-        />
-      )}
+    <>
+      {/* Drawer */}
       <div
+        className={`fixed right-0 w-1/4 z-[60] transform transition-transform duration-300 ease-in-out shadow-2xl ${
+          visible ? 'translate-x-0' : 'translate-x-full'
+        }`}
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '12px',
-          marginBottom: '16px',
+          top: '64px', // Navbar height (py-4 = 16px top + content + 16px bottom ≈ 64px)
+          height: 'calc(100vh - 64px)', // Full viewport height minus navbar
+          backgroundColor: theme === 'light' ? '#ffffff' : '#141419',
+          color: colors.text,
         }}
       >
-        {logo && (
-          <img
-            src={logo}
-            alt={`${title} logo`}
-            className="modalLogo"
-            style={{ width: '48px', height: '48px', borderRadius: '8px' }}
-          />
-        )}
-        <h2 className="modalTitle" style={{ margin: 0 }}>
-          {title}
-        </h2>
-      </div>
-      <p className="modalText">{text}</p>
-      {(siteLink || socialLinks.length > 0) && (
-        <div
+        {/* Close button */}
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 transition-colors text-2xl font-bold bg-transparent border-none cursor-pointer p-2 z-10"
           style={{
-            marginTop: '16px',
-            display: 'flex',
-            gap: '8px',
-            flexWrap: 'wrap',
+            color: theme === 'light' ? '#666666' : '#aaaaaa',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = colors.text
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color =
+              theme === 'light' ? '#666666' : '#aaaaaa'
           }}
         >
-          {siteLink && (
-            <a
-              href={siteLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                padding: '8px 16px',
-                background: '#836EF9',
-                color: 'white',
-                borderRadius: '6px',
-                textDecoration: 'none',
-                fontSize: '14px',
-              }}
-            >
-              Visit Site
-            </a>
+          ×
+        </button>
+
+        {/* Content container with padding and scroll */}
+        <div className="h-full overflow-y-auto p-6">
+          {banner && (
+            <img
+              src={banner}
+              alt={`${title} banner`}
+              className="w-full h-32 object-cover rounded-lg mb-4"
+            />
           )}
-          {socialLinks.map((link, idx) => (
-            <a
-              key={idx}
-              href={link}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                padding: '8px 12px',
-                background: '#f0f0f0',
-                color: '#333',
-                borderRadius: '6px',
-                textDecoration: 'none',
-                fontSize: '14px',
-              }}
+          
+          <div className="flex items-center gap-3 mb-4">
+            {logo && (
+              <img
+                src={logo}
+                alt={`${title} logo`}
+                className="w-12 h-12 rounded-lg"
+              />
+            )}
+            <h2
+              className="text-2xl font-semibold m-0"
+              style={{ color: colors.text }}
             >
-              Social
-            </a>
-          ))}
+              {title}
+            </h2>
+          </div>
+          
+          <p
+            className="text-base leading-relaxed mb-4"
+            style={{
+              color: theme === 'light' ? '#666666' : 'rgba(255, 255, 255, 0.8)',
+            }}
+          >
+            {text}
+          </p>
+          
+          {(siteLink || socialLinks.length > 0) && (
+            <div className="mt-4 flex flex-wrap gap-2">
+              {siteLink && (
+                <a
+                  href={siteLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2 bg-purple-600 text-white rounded-lg text-sm no-underline hover:bg-purple-700 transition-colors"
+                >
+                  Visit Site
+                </a>
+              )}
+              {socialLinks.map((link, idx) => (
+                <a
+                  key={idx}
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-2 rounded-lg text-sm no-underline transition-colors"
+                  style={{
+                    backgroundColor:
+                      theme === 'light' ? '#f0f0f0' : '#333333',
+                    color: theme === 'light' ? '#333333' : '#ffffff',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor =
+                      theme === 'light' ? '#e0e0e0' : '#444444'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor =
+                      theme === 'light' ? '#f0f0f0' : '#333333'
+                  }}
+                >
+                  Social
+                </a>
+              ))}
+            </div>
+          )}
         </div>
-      )}
-    </div>
+      </div>
+    </>
   )
 }
