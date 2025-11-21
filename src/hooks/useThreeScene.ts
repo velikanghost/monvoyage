@@ -106,8 +106,8 @@ export function useThreeScene({
       'ArrowLeft',
       'ArrowRight',
     ])
-    const panBounds = { x: 7, y: 5 }
-    const panSpeed = 0.15
+    const panBounds = { x: 13, y: 10 }
+    const panSpeed = 0.22
     const zoomStep = 0.5
     const zoomInKeys = new Set(['=', '+', 'PageUp'])
     const zoomOutKeys = new Set(['-', '_', 'PageDown'])

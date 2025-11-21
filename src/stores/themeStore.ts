@@ -42,7 +42,7 @@ export const themeColors = {
     background: 0x0b0a0f, // Dark background (existing)
     fog: 0x1a1a1f, // Dark fog
     text: '#ffffff',
-    navbarBg: '#000000',
+    navbarBg: '#141419',
     navbarText: '#ffffff',
     searchBg: '#1a1a1f',
     searchBorder: '#333333',
