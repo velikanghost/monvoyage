@@ -1,3 +1,4 @@
+import { X } from 'lucide-react'
 import { useThemeStore, themeColors } from '../stores/themeStore'
 
 interface ModalProps {
@@ -28,7 +29,7 @@ export function Modal({
     <>
       {/* Drawer */}
       <div
-        className={`fixed right-0 w-1/4 z-[60] transform transition-transform duration-300 ease-in-out shadow-2xl ${
+        className={`fixed right-0 w-1/3 z-30 transform transition-transform duration-300 ease-in-out shadow-2xl ${
           visible ? 'translate-x-0' : 'translate-x-full'
         }`}
         style={{
@@ -38,26 +39,25 @@ export function Modal({
           color: colors.text,
         }}
       >
-        {/* Close button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 transition-colors text-2xl font-bold bg-transparent border-none cursor-pointer p-2 z-10"
-          style={{
-            color: theme === 'light' ? '#666666' : '#aaaaaa',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = colors.text
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color =
-              theme === 'light' ? '#666666' : '#aaaaaa'
-          }}
-        >
-          ×
-        </button>
+        <div className="flex items-center justify-end p-4">
+          <X
+            onClick={onClose}
+            className="transition-colors bg-transparent border-none cursor-pointer z-10 size-6"
+            style={{
+              color: theme === 'light' ? '#666666' : '#aaaaaa',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = colors.text
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color =
+                theme === 'light' ? '#666666' : '#aaaaaa'
+            }}
+          />
+        </div>
 
         {/* Content container with padding and scroll */}
-        <div className="h-full overflow-y-auto p-6">
+        <div className="h-full overflow-y-auto p-6 pt-0">
           {banner && (
             <img
               src={banner}
@@ -65,7 +65,7 @@ export function Modal({
               className="w-full h-32 object-cover rounded-lg mb-4"
             />
           )}
-          
+
           <div className="flex items-center gap-3 mb-4">
             {logo && (
               <img
@@ -81,7 +81,7 @@ export function Modal({
               {title}
             </h2>
           </div>
-          
+
           <p
             className="text-base leading-relaxed mb-4"
             style={{
@@ -90,7 +90,7 @@ export function Modal({
           >
             {text}
           </p>
-          
+
           {(siteLink || socialLinks.length > 0) && (
             <div className="mt-4 flex flex-wrap gap-2">
               {siteLink && (
@@ -111,8 +111,7 @@ export function Modal({
                   rel="noopener noreferrer"
                   className="px-3 py-2 rounded-lg text-sm no-underline transition-colors"
                   style={{
-                    backgroundColor:
-                      theme === 'light' ? '#f0f0f0' : '#333333',
+                    backgroundColor: theme === 'light' ? '#f0f0f0' : '#333333',
                     color: theme === 'light' ? '#333333' : '#ffffff',
                   }}
                   onMouseEnter={(e) => {

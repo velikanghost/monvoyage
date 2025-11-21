@@ -83,16 +83,23 @@ function relaxPositions(
 // Generate positions in a sphere around the camera
 function generatePositions(count: number): THREE.Vector3[] {
   const positions: THREE.Vector3[] = []
+  const safeCount = Math.max(count, 1)
 
   // Dynamically adjust radius based on number of projects
   // More projects = slightly larger radius to avoid overlap
   // But keep it constrained to fit in viewport
   const baseRadius = 4
-  const radiusMultiplier = Math.min(
-    1 + Math.log10(Math.max(count, 1)) * 0.2,
-    1.8,
+  const radiusMultiplier = Math.min(1 + Math.log10(safeCount) * 0.2, 1.8)
+  const largeCategoryFactor = THREE.MathUtils.clamp((safeCount - 12) / 70, 0, 1)
+  const spreadBoost = THREE.MathUtils.lerp(1, 1.45, largeCategoryFactor)
+  const radius = baseRadius * radiusMultiplier * spreadBoost
+  const minDistance = THREE.MathUtils.lerp(1.3, 2.2, largeCategoryFactor)
+  const horizontalSpreadMultiplier = THREE.MathUtils.lerp(
+    1.2,
+    2.1,
+    largeCategoryFactor,
   )
-  const radius = baseRadius * radiusMultiplier
+  const relaxIterations = Math.round(5 + largeCategoryFactor * 3)
 
   const goldenRatio = (1 + Math.sqrt(5)) / 2
   const angleIncrement = Math.PI * 2 * goldenRatio
@@ -100,7 +107,7 @@ function generatePositions(count: number): THREE.Vector3[] {
   const depthBounds = { min: -12, max: -7 }
 
   for (let i = 0; i < count; i++) {
-    const t = i / Math.max(count, 1)
+    const t = i / safeCount
     const inclination = Math.acos(1 - 2 * t)
     const azimuth = angleIncrement * i
 
@@ -113,9 +120,9 @@ function generatePositions(count: number): THREE.Vector3[] {
   }
 
   relaxPositions(positions, {
-    minDistance: 1.5,
-    iterations: 5,
-    maxHorizontalSpread: radius * 1.2,
+    minDistance,
+    iterations: relaxIterations,
+    maxHorizontalSpread: radius * horizontalSpreadMultiplier,
     depthBounds,
   })
 

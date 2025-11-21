@@ -25,6 +25,61 @@ interface UseHotspotsProps {
   categories: Category[]
 }
 
+function resolveLocalCollisions(
+  meshes: THREE.Mesh[],
+  {
+    minDistance = 0.95,
+    iterations = 4,
+    bounds = { x: 12, y: 8 },
+  }: {
+    minDistance?: number
+    iterations?: number
+    bounds?: { x: number; y: number }
+  } = {},
+) {
+  for (let iteration = 0; iteration < iterations; iteration++) {
+    for (let i = 0; i < meshes.length; i++) {
+      for (let j = i + 1; j < meshes.length; j++) {
+        const meshA = meshes[i]
+        const meshB = meshes[j]
+
+        const dir = new THREE.Vector2(
+          meshA.position.x - meshB.position.x,
+          meshA.position.y - meshB.position.y,
+        )
+        let distance = dir.length()
+
+        if (distance === 0) {
+          dir.set(Math.random() - 0.5, Math.random() - 0.5)
+          distance = dir.length()
+        }
+
+        if (distance < minDistance) {
+          const push = (minDistance - distance) / 2
+          dir.normalize()
+          meshA.position.x += dir.x * push
+          meshA.position.y += dir.y * push
+          meshB.position.x -= dir.x * push
+          meshB.position.y -= dir.y * push
+        }
+      }
+    }
+  }
+
+  meshes.forEach((mesh) => {
+    mesh.position.x = THREE.MathUtils.clamp(
+      mesh.position.x,
+      -bounds.x,
+      bounds.x,
+    )
+    mesh.position.y = THREE.MathUtils.clamp(
+      mesh.position.y,
+      -bounds.y,
+      bounds.y,
+    )
+  })
+}
+
 export function useHotspots({
   sceneRef,
   cameraRef,
@@ -199,6 +254,18 @@ export function useHotspots({
             duration: 1.5,
             ease: 'sine.inOut',
           })
+        })
+
+        const collisionMinDistance = THREE.MathUtils.clamp(
+          THREE.MathUtils.mapLinear(projectCount, 20, 120, 0.9, 1.4),
+          0.9,
+          1.4,
+        )
+
+        resolveLocalCollisions(hotspotMeshesRef.current, {
+          minDistance: collisionMinDistance,
+          iterations: 5,
+          bounds: { x: 14, y: 10 },
         })
       }
     }
