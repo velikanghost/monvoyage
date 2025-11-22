@@ -6,6 +6,14 @@ interface UseThreeSceneProps {
   materialRef: React.MutableRefObject<THREE.PointsMaterial | null>
   selectedCategory: string | null
   onHotspotClick?: (hotspotId: string) => void
+  onHotspotHover?: (
+    hotspot: {
+      id: string
+      name: string
+      x: number
+      y: number
+    } | null,
+  ) => void
   backgroundColor?: number
 }
 
@@ -14,6 +22,7 @@ export function useThreeScene({
   materialRef,
   selectedCategory,
   onHotspotClick,
+  onHotspotHover,
   backgroundColor = 0x0b0a0f,
 }: UseThreeSceneProps) {
   const sceneRef = useRef<THREE.Scene | null>(null)
@@ -34,6 +43,7 @@ export function useThreeScene({
   const zoomBoundsRef = useRef({ min: 6.5, max: 13 })
   const baseZoomRef = useRef(10)
   const hasUserZoomedRef = useRef(false)
+  const lastHoveredIdRef = useRef<string | null>(null)
 
   useEffect(() => {
     if (!containerRef.current) return
@@ -75,6 +85,11 @@ export function useThreeScene({
           name: string
           description: string
         }
+        // Clear hover when clicking to open modal
+        if (onHotspotHover) {
+          onHotspotHover(null)
+          lastHoveredIdRef.current = null
+        }
         onHotspotClick(data.id)
       }
     }
@@ -87,6 +102,44 @@ export function useThreeScene({
       const intersects = raycaster.intersectObjects(hotspotMeshesRef.current)
       document.body.style.cursor =
         selectedCategory && intersects.length > 0 ? 'pointer' : 'default'
+
+      // Handle hover detection for tooltip
+      if (
+        selectedCategoryRef.current &&
+        intersects.length > 0 &&
+        onHotspotHover
+      ) {
+        const hoveredMesh = intersects[0].object as THREE.Mesh
+        const data = hoveredMesh.userData as {
+          id: string
+          name: string
+          description: string
+        }
+
+        // Only update if hovering a different project
+        if (lastHoveredIdRef.current !== data.id) {
+          // Get 3D world position
+          const worldPosition = new THREE.Vector3()
+          hoveredMesh.getWorldPosition(worldPosition)
+
+          // Convert to screen coordinates
+          const screenPosition = worldPosition.clone().project(camera)
+          const x = (screenPosition.x * 0.5 + 0.5) * window.innerWidth
+          const y = (-screenPosition.y * 0.5 + 0.5) * window.innerHeight
+
+          onHotspotHover({
+            id: data.id,
+            name: data.name,
+            x,
+            y: y - 40, // Offset above the logo
+          })
+          lastHoveredIdRef.current = data.id
+        }
+      } else if (lastHoveredIdRef.current !== null && onHotspotHover) {
+        // Clear hover when not hovering any project
+        onHotspotHover(null)
+        lastHoveredIdRef.current = null
+      }
 
       mouseXRef.current = (e.clientX / window.innerWidth - 0.5) * 2
       mouseYRef.current = (e.clientY / window.innerHeight - 0.5) * 2
@@ -240,7 +293,7 @@ export function useThreeScene({
         }
       })
     }
-  }, [containerRef, materialRef, onHotspotClick])
+  }, [containerRef, materialRef, onHotspotClick, onHotspotHover])
 
   // Update background color when it changes (without recreating the scene)
   useEffect(() => {
@@ -256,12 +309,18 @@ export function useThreeScene({
     // Reset pan offset when category changes
     panOffsetRef.current.set(0, 0)
 
+    // Clear hover tooltip when category changes
+    if (onHotspotHover) {
+      onHotspotHover(null)
+      lastHoveredIdRef.current = null
+    }
+
     const baseZoom = selectedCategory ? -3 : 8
     baseZoomRef.current = baseZoom
 
     const bounds = selectedCategory
-      ? { min: baseZoom - 2.5, max: baseZoom + 6 }
-      : { min: baseZoom - 5, max: baseZoom + 10 }
+      ? { min: baseZoom - 2.5, max: baseZoom + 12 } // Increased max zoom out for category view
+      : { min: baseZoom - 5, max: baseZoom + 18 } // Increased max zoom out for category picker
 
     zoomBoundsRef.current = bounds
 
@@ -274,7 +333,7 @@ export function useThreeScene({
       cameraRef.current.position.x = 0
       cameraRef.current.position.y = 0
     }
-  }, [selectedCategory])
+  }, [selectedCategory, onHotspotHover])
 
   return {
     sceneRef,

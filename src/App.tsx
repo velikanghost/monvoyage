@@ -11,6 +11,7 @@ import { CategoryButtons } from './components/CategoryButtons'
 import { Modal } from './components/Modal'
 import { Navbar } from './components/Navbar'
 import { ControlsHint } from './components/ControlsHint'
+import { ProjectTooltip } from './components/ProjectTooltip'
 import { useThemeStore, themeColors } from './stores/themeStore'
 import './App.css'
 import ecosystemData from './data/monad_ecosystem.json'
@@ -182,6 +183,12 @@ function App() {
   const [selectedHotspotId, setSelectedHotspotId] = useState<string | null>(
     null,
   )
+  const [hoveredProject, setHoveredProject] = useState<{
+    id: string
+    name: string
+    x: number
+    y: number
+  } | null>(null)
 
   // Get project data for selected hotspot
   const getProjectData = (hotspotId: string) => {
@@ -200,6 +207,14 @@ function App() {
     }
     return null
   }
+
+  // Handle hotspot hover for tooltip
+  const handleHotspotHover = useCallback(
+    (hotspot: { id: string; name: string; x: number; y: number } | null) => {
+      setHoveredProject(hotspot)
+    },
+    [],
+  )
 
   // Handle hotspot click
   const handleHotspotClick = useCallback(
@@ -244,6 +259,7 @@ function App() {
     materialRef,
     selectedCategory,
     onHotspotClick: handleHotspotClick,
+    onHotspotHover: handleHotspotHover,
     backgroundColor: colors.background,
   })
 
@@ -321,6 +337,13 @@ function App() {
         onSelect={handleCategorySelect}
       />
       {selectedCategory && <ControlsHint onBack={handleBackToCategories} />}
+      {hoveredProject && !modalVisible && (
+        <ProjectTooltip
+          name={hoveredProject.name}
+          x={hoveredProject.x}
+          y={hoveredProject.y}
+        />
+      )}
       <Modal
         visible={modalVisible}
         title={modalData.title}

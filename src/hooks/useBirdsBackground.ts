@@ -201,6 +201,7 @@ export function useBirdsBackground({
     birdMesh.rotation.y = Math.PI / 2
     birdMesh.matrixAutoUpdate = false
     birdMesh.updateMatrix()
+    birdMesh.renderOrder = -15 // Render far behind everything to emphasize background role
     birdMeshRef.current = birdMesh
 
     scene.add(birdMesh)

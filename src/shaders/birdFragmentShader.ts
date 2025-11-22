@@ -14,6 +14,6 @@ void main() {
   float purpleG = z2 * 0.3;
   float purpleB = z2 * 0.95;
   
-  gl_FragColor = vec4( purpleR, purpleG, purpleB, 1. );
+  gl_FragColor = vec4( purpleR, purpleG, purpleB, 0.7 );
 }
 `

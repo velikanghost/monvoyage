@@ -123,10 +123,10 @@ export function useHotspots({
       if (category) {
         // Dynamically adjust logo size based on number of projects
         const projectCount = category.projects.length
-        const baseSize = 0.85
+        const baseSize = 1.0 // Increased base size for better visibility
         const sizeMultiplier = Math.max(0.45, Math.min(1, 30 / projectCount))
-        const minSize = 0.6
-        const maxSize = 1.5
+        const minSize = 0.7 // Increased minimum size
+        const maxSize = 1.6 // Slightly increased max size
         const clampedWorldSize = THREE.MathUtils.clamp(
           baseSize * sizeMultiplier,
           minSize,
@@ -147,7 +147,7 @@ export function useHotspots({
 
           const mesh = new THREE.Mesh(geo, mat)
           mesh.position.copy(project.position)
-          mesh.renderOrder = 1
+          mesh.renderOrder = 10 // Higher render order to ensure logos are on top
           mesh.userData = {
             id: project.id,
             name: project.name,
@@ -183,13 +183,13 @@ export function useHotspots({
             canvas.width = resolution
             canvas.height = resolution
 
-            // Draw shadow
-            ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'
-            ctx.shadowBlur = 20
+            // Draw shadow - stronger shadow for better visibility
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.7)'
+            ctx.shadowBlur = 30
             ctx.shadowOffsetX = 0
-            ctx.shadowOffsetY = 4
+            ctx.shadowOffsetY = 6
 
-            // Draw rounded rectangle background
+            // Draw rounded rectangle background with border
             const radius = resolution * 0.1 // 12px equivalent at this resolution
             const x = resolution * 0.05
             const y = resolution * 0.05
@@ -213,9 +213,14 @@ export function useHotspots({
             ctx.quadraticCurveTo(x, y, x + radius, y)
             ctx.closePath()
 
-            // Fill with white background (or use alpha for transparency)
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.1)'
+            // Fill with more opaque white background for better visibility
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)'
             ctx.fill()
+
+            // Add subtle border for definition
+            ctx.strokeStyle = 'rgba(0, 0, 0, 0.15)'
+            ctx.lineWidth = 2
+            ctx.stroke()
 
             // Clip to rounded rectangle for the image
             ctx.clip()
