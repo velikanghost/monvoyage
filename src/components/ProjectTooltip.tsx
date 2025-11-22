@@ -1,4 +1,4 @@
-import { useThemeStore, themeColors } from '../stores/themeStore'
+import { useThemeStore } from '../stores/themeStore'
 
 interface ProjectTooltipProps {
   name: string
