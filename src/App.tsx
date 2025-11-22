@@ -10,6 +10,7 @@ import { useCategoryNavigation } from './hooks/useCategoryNavigation'
 import { CategoryButtons } from './components/CategoryButtons'
 import { Modal } from './components/Modal'
 import { Navbar } from './components/Navbar'
+import { ControlsHint } from './components/ControlsHint'
 import { useThemeStore, themeColors } from './stores/themeStore'
 import './App.css'
 import ecosystemData from './data/monad_ecosystem.json'
@@ -312,16 +313,14 @@ function App() {
 
   return (
     <>
-      <Navbar
-        showBackButton={!!selectedCategory}
-        onBackClick={handleBackToCategories}
-      />
+      <Navbar />
       <div ref={containerRef} />
       <CategoryButtons
         ref={categoryButtonsRef}
         categories={categories}
         onSelect={handleCategorySelect}
       />
+      {selectedCategory && <ControlsHint onBack={handleBackToCategories} />}
       <Modal
         visible={modalVisible}
         title={modalData.title}

@@ -253,6 +253,9 @@ export function useThreeScene({
     selectedCategoryRef.current = selectedCategory
     hasUserZoomedRef.current = false
 
+    // Reset pan offset when category changes
+    panOffsetRef.current.set(0, 0)
+
     const baseZoom = selectedCategory ? -3 : 8
     baseZoomRef.current = baseZoom
 
@@ -265,6 +268,12 @@ export function useThreeScene({
     const clamped = THREE.MathUtils.clamp(baseZoom, bounds.min, bounds.max)
     zoomRef.current = clamped
     zoomSmoothRef.current = clamped
+
+    // Reset camera position to center when category changes
+    if (cameraRef.current) {
+      cameraRef.current.position.x = 0
+      cameraRef.current.position.y = 0
+    }
   }, [selectedCategory])
 
   return {
