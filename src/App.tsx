@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 import { useThreeScene } from './hooks/useThreeScene'
 import { useNFTs } from './hooks/useNFTs'
@@ -13,14 +13,16 @@ import { Navbar } from './components/Navbar'
 import { ControlsHint } from './components/ControlsHint'
 import { ProjectTooltip } from './components/ProjectTooltip'
 import { useThemeStore, themeColors } from './stores/themeStore'
+import { generateEcoCategories } from './services/generateEcoCategories'
+import {
+  loadMainnetProjects,
+  type Project as LoadedProject,
+} from './utils/loadProjectData'
 import './App.css'
-import ecosystemData from './data/monad_ecosystem.json'
 
 interface Project {
   id: string
   name: string
-  slug: string
-  project_type: string
   description: string
   categories: string[]
   logo: string
@@ -131,35 +133,106 @@ function generatePositions(count: number): THREE.Vector3[] {
   return positions
 }
 
-// Transform scraped data into categories
-const categories: Category[] = ecosystemData.categories.map((categoryName) => {
-  const categoryId = categoryName.toLowerCase().replace(/\s+/g, '-')
-  const categoryProjects = ecosystemData.projects.filter((proj) =>
-    proj.categories.includes(categoryName),
-  )
-
-  const positions = generatePositions(categoryProjects.length)
-
-  return {
-    id: categoryId,
-    name: categoryName,
-    projects: categoryProjects.map((proj, index) => ({
-      id: proj.slug,
-      name: proj.name,
-      slug: proj.slug,
-      project_type: proj.project_type,
-      description: proj.description,
-      categories: proj.categories,
-      logo: proj.logo,
-      banner: proj.banner,
-      site_link: proj.site_link,
-      social_links: proj.social_links,
-      position: positions[index],
-    })),
-  }
-})
-
 function App() {
+  // State for loaded data
+  const [ecoCategories, setEcoCategories] = useState<{
+    categories: string[]
+  } | null>(null)
+  const [allProjects, setAllProjects] = useState<LoadedProject[]>([])
+
+  // Load data on mount
+  useEffect(() => {
+    async function loadData() {
+      try {
+        const { categories, mapping } = await generateEcoCategories()
+        const projects = await loadMainnetProjects(mapping)
+        setEcoCategories(categories)
+        setAllProjects(projects)
+      } catch (error) {
+        console.error('Failed to load project data:', error)
+      }
+    }
+    loadData()
+  }, [])
+
+  // Validate and log data before using
+  useEffect(() => {
+    if (!ecoCategories || allProjects.length === 0) return
+
+    console.log('='.repeat(80))
+    console.log('DATA VALIDATION - TRANSFORMED PROJECTS')
+    console.log('='.repeat(80))
+    console.log(`Total categories: ${ecoCategories.categories.length}`)
+    console.log(`Total projects: ${allProjects.length}`)
+    console.log(
+      `Projects with logo: ${allProjects.filter((p) => p.logo).length}`,
+    )
+    console.log(
+      `Projects with banner: ${allProjects.filter((p) => p.banner).length}`,
+    )
+    console.log(
+      `Projects without categories: ${
+        allProjects.filter((p) => p.categories.length === 0).length
+      }`,
+    )
+
+    // Show category distribution
+    const categoryCounts: Record<string, number> = {}
+    allProjects.forEach((p) => {
+      p.categories.forEach((cat) => {
+        categoryCounts[cat] = (categoryCounts[cat] || 0) + 1
+      })
+    })
+    console.log('\nCategory distribution:')
+    Object.entries(categoryCounts)
+      .sort((a, b) => b[1] - a[1])
+      .forEach(([cat, count]) => {
+        console.log(`  ${cat}: ${count} projects`)
+      })
+
+    // Show sample projects
+    console.log('\nSample projects (first 3):')
+    allProjects.slice(0, 3).forEach((p) => {
+      console.log(`  ${p.name}:`, {
+        categories: p.categories,
+        hasLogo: !!p.logo,
+        hasBanner: !!p.banner,
+        hasDescription: !!p.description,
+      })
+    })
+
+    console.log('='.repeat(80))
+  }, [allProjects, ecoCategories])
+
+  // Transform loaded projects into categories with positions
+  const categories: Category[] = useMemo(() => {
+    if (!ecoCategories || allProjects.length === 0) return []
+
+    return ecoCategories.categories.map((categoryName) => {
+      const categoryId = categoryName.toLowerCase().replace(/\s+/g, '-')
+      const categoryProjects = allProjects.filter((proj) =>
+        proj.categories.includes(categoryName),
+      )
+
+      const positions = generatePositions(categoryProjects.length)
+
+      return {
+        id: categoryId,
+        name: categoryName,
+        projects: categoryProjects.map((proj, index) => ({
+          id: proj.id,
+          name: proj.name,
+          description: proj.description,
+          categories: proj.categories,
+          logo: proj.logo,
+          banner: proj.banner || '',
+          site_link: proj.site_link || null,
+          social_links: proj.social_links || [],
+          position: positions[index],
+        })),
+      }
+    })
+  }, [allProjects, ecoCategories])
   const containerRef = useRef<HTMLDivElement>(null)
   const categoryButtonsRef = useRef<HTMLDivElement>(null)
   const materialRef = useRef<THREE.PointsMaterial | null>(null) // Kept for compatibility
@@ -282,7 +355,7 @@ function App() {
   // NFT loading and management
   const { nftSvg } = useNFTs()
 
-  // Hotspot management
+  // Hotspot management - only run when data is ready
   useHotspots({
     sceneRef,
     cameraRef,
@@ -327,15 +400,20 @@ function App() {
     }
   }, [selectedHotspotId, selectedHotspotIdRef])
 
+  // Only render components that depend on categories when data is available
+  const isDataReady = categories.length > 0
+
   return (
     <>
       <Navbar />
       <div ref={containerRef} />
-      <CategoryButtons
-        ref={categoryButtonsRef}
-        categories={categories}
-        onSelect={handleCategorySelect}
-      />
+      {isDataReady && (
+        <CategoryButtons
+          ref={categoryButtonsRef}
+          categories={categories}
+          onSelect={handleCategorySelect}
+        />
+      )}
       {selectedCategory && <ControlsHint onBack={handleBackToCategories} />}
       {hoveredProject && !modalVisible && (
         <ProjectTooltip
