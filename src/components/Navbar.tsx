@@ -1,13 +1,10 @@
 import { useState } from 'react'
-import { Moon, Sun, ArrowLeft } from 'lucide-react'
+import { Moon, Sun } from 'lucide-react'
 import { useThemeStore, themeColors } from '../stores/themeStore'
 
-interface NavbarProps {
-  showBackButton?: boolean
-  onBackClick?: () => void
-}
+interface NavbarProps {}
 
-export function Navbar({ showBackButton = false, onBackClick }: NavbarProps) {
+export function Navbar({}: NavbarProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const { theme, toggleTheme } = useThemeStore()
 
@@ -34,16 +31,6 @@ export function Navbar({ showBackButton = false, onBackClick }: NavbarProps) {
           monvoyage
         </div>
         <div className="flex items-center gap-4">
-          {showBackButton && onBackClick && (
-            <button
-              onClick={onBackClick}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-opacity-10 hover:bg-gray-500 transition-colors"
-              style={{ color: colors.navbarText }}
-            >
-              <ArrowLeft size={18} />
-              <span>Back to Categories</span>
-            </button>
-          )}
           <form onSubmit={handleSearch} className="flex items-center">
             <input
               type="text"

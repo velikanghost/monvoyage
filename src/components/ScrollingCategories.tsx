@@ -1,4 +1,5 @@
 import Marquee from '@/animata/container/marquee'
+import { useThemeStore, themeColors } from '../stores/themeStore'
 
 interface Category {
   id: string
@@ -17,13 +18,26 @@ function CategoryCard({
   category: Category
   onSelect: (categoryId: string) => void
 }) {
+  const { theme } = useThemeStore()
+  const colors = themeColors[theme]
+  const isLight = theme === 'light'
+
   return (
     <button
       onClick={() => onSelect(category.id)}
-      className="flex h-24 w-48 shrink-0 items-center justify-center overflow-hidden rounded-xl border bg-background px-4 py-3 transition-all hover:scale-105 hover:shadow-lg dark:border-zinc-700"
+      className="flex h-24 w-48 shrink-0 items-center justify-center overflow-hidden rounded-xl border px-4 py-3 transition-all hover:scale-105 hover:shadow-lg"
+      style={{
+        backgroundColor: isLight
+          ? 'rgba(255, 255, 255, 0.9)'
+          : 'rgba(20, 20, 25, 0.9)',
+        borderColor: isLight
+          ? 'rgba(0, 0, 0, 0.1)'
+          : 'rgba(255, 255, 255, 0.2)',
+        color: colors.text,
+      }}
       key={category.id}
     >
-      <span className="text-lg font-bold text-foreground">{category.name}</span>
+      <span className="text-lg font-bold">{category.name}</span>
     </button>
   )
 }
