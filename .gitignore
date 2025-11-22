@@ -3,6 +3,3 @@ node_modules
 dist
 
 /dist
-src/data/categories.json
-src/data/testnet
-src/data/mainnet
