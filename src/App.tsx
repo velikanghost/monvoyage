@@ -13,9 +13,12 @@ import { Navbar } from './components/Navbar'
 import { ControlsHint } from './components/ControlsHint'
 import { ProjectTooltip } from './components/ProjectTooltip'
 import { useThemeStore, themeColors } from './stores/themeStore'
-import { generateEcoCategories } from './services/generateEcoCategories'
 import {
-  loadMainnetProjects,
+  generateEcoCategories,
+  type Network,
+} from './services/generateEcoCategories'
+import {
+  loadNetworkProjects,
   type Project as LoadedProject,
 } from './utils/loadProjectData'
 import './App.css'
@@ -134,18 +137,21 @@ function generatePositions(count: number): THREE.Vector3[] {
 }
 
 function App() {
+  // Network state
+  const [network, setNetwork] = useState<Network>('mainnet')
+
   // State for loaded data
   const [ecoCategories, setEcoCategories] = useState<{
     categories: string[]
   } | null>(null)
   const [allProjects, setAllProjects] = useState<LoadedProject[]>([])
 
-  // Load data on mount
+  // Load data when network changes
   useEffect(() => {
     async function loadData() {
       try {
-        const { categories, mapping } = await generateEcoCategories()
-        const projects = await loadMainnetProjects(mapping)
+        const { categories, mapping } = await generateEcoCategories(network)
+        const projects = await loadNetworkProjects(mapping, network)
         setEcoCategories(categories)
         setAllProjects(projects)
       } catch (error) {
@@ -153,7 +159,11 @@ function App() {
       }
     }
     loadData()
-  }, [])
+    // Reset to categories screen when network changes
+    setSelectedCategory(null)
+    setModalVisible(false)
+    setSelectedHotspotId(null)
+  }, [network])
 
   // Validate and log data before using
   useEffect(() => {
@@ -263,23 +273,11 @@ function App() {
     y: number
   } | null>(null)
 
-  // Get project data for selected hotspot
-  const getProjectData = (hotspotId: string) => {
-    for (const category of categories) {
-      const project = category.projects.find((p) => p.id === hotspotId)
-      if (project) {
-        return {
-          name: project.name,
-          description: project.description,
-          logo: project.logo,
-          banner: project.banner,
-          siteLink: project.site_link,
-          socialLinks: project.social_links,
-        }
-      }
-    }
-    return null
-  }
+  // Use refs to store callbacks so they don't cause scene recreation
+  const categoriesRef = useRef<Category[]>([])
+  useEffect(() => {
+    categoriesRef.current = categories
+  }, [categories])
 
   // Handle hotspot hover for tooltip
   const handleHotspotHover = useCallback(
@@ -289,34 +287,48 @@ function App() {
     [],
   )
 
-  // Handle hotspot click
-  const handleHotspotClick = useCallback(
-    (hotspotId: string) => {
-      const projectData = getProjectData(hotspotId)
+  // Handle hotspot click - use ref to avoid recreating scene
+  const handleHotspotClick = useCallback((hotspotId: string) => {
+    // Use ref to get current categories without causing dependency changes
+    const currentCategories = categoriesRef.current
+    let projectData = null
 
-      if (!projectData) return
-
-      setSelectedHotspotId((prevId) => {
-        // If clicking the same hotspot, close the modal
-        if (prevId === hotspotId) {
-          setModalVisible(false)
-          return null
+    for (const category of currentCategories) {
+      const project = category.projects.find((p) => p.id === hotspotId)
+      if (project) {
+        projectData = {
+          name: project.name,
+          description: project.description,
+          logo: project.logo,
+          banner: project.banner,
+          siteLink: project.site_link,
+          socialLinks: project.social_links,
         }
-        // Otherwise, show/update the modal
-        setModalData({
-          title: projectData.name,
-          text: projectData.description,
-          logo: projectData.logo,
-          banner: projectData.banner,
-          siteLink: projectData.siteLink,
-          socialLinks: projectData.socialLinks,
-        })
-        setModalVisible(true)
-        return hotspotId
+        break
+      }
+    }
+
+    if (!projectData) return
+
+    setSelectedHotspotId((prevId) => {
+      // If clicking the same hotspot, close the modal
+      if (prevId === hotspotId) {
+        setModalVisible(false)
+        return null
+      }
+      // Otherwise, show/update the modal
+      setModalData({
+        title: projectData.name,
+        text: projectData.description,
+        logo: projectData.logo,
+        banner: projectData.banner,
+        siteLink: projectData.siteLink,
+        socialLinks: projectData.socialLinks,
       })
-    },
-    [], // getProjectData doesn't depend on any props/state
-  )
+      setModalVisible(true)
+      return hotspotId
+    })
+  }, []) // Empty deps - uses ref instead
 
   // Three.js scene setup
   const {
@@ -405,7 +417,11 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar
+        network={network}
+        onNetworkChange={setNetwork}
+        showNetworkToggle={!selectedCategory}
+      />
       <div ref={containerRef} />
       {isDataReady && (
         <CategoryButtons

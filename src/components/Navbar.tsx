@@ -1,10 +1,19 @@
 import { useState } from 'react'
 import { Moon, Sun } from 'lucide-react'
 import { useThemeStore, themeColors } from '../stores/themeStore'
+import type { Network } from '../services/generateEcoCategories'
 
-interface NavbarProps {}
+interface NavbarProps {
+  network: Network
+  onNetworkChange: (network: Network) => void
+  showNetworkToggle: boolean
+}
 
-export function Navbar({}: NavbarProps) {
+export function Navbar({
+  network,
+  onNetworkChange,
+  showNetworkToggle,
+}: NavbarProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const { theme, toggleTheme } = useThemeStore()
 
@@ -31,6 +40,50 @@ export function Navbar({}: NavbarProps) {
           monvoyage
         </div>
         <div className="flex items-center gap-4">
+          {showNetworkToggle && (
+            <div
+              className="flex items-center gap-1 rounded-lg px-1 py-1"
+              style={{
+                backgroundColor: colors.searchBg,
+                borderWidth: '1px',
+                borderStyle: 'solid',
+                borderColor: colors.searchBorder,
+              }}
+            >
+              <button
+                onClick={() => onNetworkChange('mainnet')}
+                className="px-3 py-1.5 rounded text-sm font-medium transition-colors"
+                style={
+                  network === 'mainnet'
+                    ? {
+                        backgroundColor: colors.navbarText,
+                        color: colors.navbarBg,
+                      }
+                    : {
+                        color: colors.navbarText,
+                      }
+                }
+              >
+                Mainnet
+              </button>
+              <button
+                onClick={() => onNetworkChange('testnet')}
+                className="px-3 py-1.5 rounded text-sm font-medium transition-colors"
+                style={
+                  network === 'testnet'
+                    ? {
+                        backgroundColor: colors.navbarText,
+                        color: colors.navbarBg,
+                      }
+                    : {
+                        color: colors.navbarText,
+                      }
+                }
+              >
+                Testnet
+              </button>
+            </div>
+          )}
           <form onSubmit={handleSearch} className="flex items-center">
             <input
               type="text"

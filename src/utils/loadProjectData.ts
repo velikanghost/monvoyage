@@ -1,5 +1,8 @@
 import ecosystemData from '../data/monad_ecosystem.json'
-import type { CategoryMapping } from '../services/generateEcoCategories'
+import type {
+  CategoryMapping,
+  Network,
+} from '../services/generateEcoCategories'
 
 export interface Project {
   id: string
@@ -16,17 +19,25 @@ export interface Project {
 }
 
 /**
- * Loads mainnet projects and merges with ecosystem metadata
- * Only logo and banner come from ecosystem.json, everything else from mainnet files
+ * Loads network projects and merges with ecosystem metadata
+ * Only logo and banner come from ecosystem.json, everything else from network files
  * Uses dynamic imports to handle invalid JSON files gracefully
  */
-export async function loadMainnetProjects(
+export async function loadNetworkProjects(
   categoryMapping: CategoryMapping,
+  network: Network = 'mainnet',
 ): Promise<Project[]> {
   // Use Vite's import.meta.glob with lazy loading to handle invalid JSON gracefully
+  // Vite requires string literals, so we load both networks and filter at runtime
   const mainnetModules = import.meta.glob('../data/mainnet/*.json', {
     eager: false,
   })
+  const testnetModules = import.meta.glob('../data/testnet/*.json', {
+    eager: false,
+  })
+
+  // Select the appropriate modules based on network
+  const networkModules = network === 'mainnet' ? mainnetModules : testnetModules
 
   // Create ecosystem lookup map by name
   const ecosystemMap = new Map<string, (typeof ecosystemData.projects)[0]>()
@@ -40,13 +51,13 @@ export async function loadMainnetProjects(
   const projects: Project[] = []
 
   // Load all modules with error handling
-  const loadPromises = Object.entries(mainnetModules).map(
+  const loadPromises = Object.entries(networkModules).map(
     async ([filePath, loader]) => {
       try {
         const module = await loader()
-        const mainnetProject = ((module as any).default || module) as any
+        const networkProject = ((module as any).default || module) as any
 
-        if (!mainnetProject.name) {
+        if (!networkProject.name) {
           const fileName = filePath.split('/').pop() || ''
           console.warn(`Project in ${fileName} missing name, skipping`)
           return
@@ -61,22 +72,22 @@ export async function loadMainnetProjects(
 
         // Find matching project in ecosystem for logo/banner
         const ecosystemProject =
-          ecosystemMap.get(mainnetProject.name.toLowerCase()) ||
+          ecosystemMap.get(networkProject.name.toLowerCase()) ||
           ecosystemMap.get(fileName.toLowerCase())
 
         // Transform categories
         const transformedCategories: string[] = []
         if (
-          mainnetProject.categories &&
-          Array.isArray(mainnetProject.categories)
+          networkProject.categories &&
+          Array.isArray(networkProject.categories)
         ) {
-          mainnetProject.categories.forEach((cat: string) => {
+          networkProject.categories.forEach((cat: string) => {
             const transformed = categoryMapping[cat]
             if (transformed) {
               transformedCategories.push(transformed)
             } else {
               console.warn(
-                `Unknown category "${cat}" for project ${mainnetProject.name}`,
+                `Unknown category "${cat}" for project ${networkProject.name}`,
               )
             }
           })
@@ -87,18 +98,18 @@ export async function loadMainnetProjects(
 
         // Build project object
         const project: Project = {
-          id: mainnetProject.name.toLowerCase().replace(/\s+/g, '-'),
-          name: mainnetProject.name,
-          description: mainnetProject.description || '',
+          id: networkProject.name.toLowerCase().replace(/\s+/g, '-'),
+          name: networkProject.name,
+          description: networkProject.description || '',
           logo: ecosystemProject?.logo || '',
           banner: ecosystemProject?.banner || '',
           site_link:
-            mainnetProject.links?.project || ecosystemProject?.site_link,
+            networkProject.links?.project || ecosystemProject?.site_link,
           social_links: ecosystemProject?.social_links || [],
           categories: uniqueCategories,
-          addresses: mainnetProject.addresses,
-          links: mainnetProject.links,
-          live: mainnetProject.live,
+          addresses: networkProject.addresses,
+          links: networkProject.links,
+          live: networkProject.live,
         }
 
         projects.push(project)

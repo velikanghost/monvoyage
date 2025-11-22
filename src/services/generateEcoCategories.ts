@@ -10,25 +10,36 @@ interface ProjectCategoryCount {
   [category: string]: number
 }
 
+export type Network = 'mainnet' | 'testnet'
+
 /**
- * Generates eco categories and mapping from mainnet files
+ * Generates eco categories and mapping from network files
  * Option A: Runtime generation (no file saving)
  * Uses dynamic imports to handle invalid JSON files gracefully
  */
-export async function generateEcoCategories(): Promise<{
+export async function generateEcoCategories(
+  network: Network = 'mainnet',
+): Promise<{
   categories: EcoCategories
   mapping: CategoryMapping
 }> {
   // Use Vite's import.meta.glob with lazy loading to handle invalid JSON gracefully
+  // Vite requires string literals, so we load both networks and filter at runtime
   const mainnetModules = import.meta.glob('../data/mainnet/*.json', {
     eager: false,
   })
+  const testnetModules = import.meta.glob('../data/testnet/*.json', {
+    eager: false,
+  })
+
+  // Select the appropriate modules based on network
+  const networkModules = network === 'mainnet' ? mainnetModules : testnetModules
 
   // Count projects per category
   const categoryCounts: ProjectCategoryCount = {}
 
   // Load all modules with error handling
-  const loadPromises = Object.entries(mainnetModules).map(
+  const loadPromises = Object.entries(networkModules).map(
     async ([filePath, loader]) => {
       try {
         const module = await loader()

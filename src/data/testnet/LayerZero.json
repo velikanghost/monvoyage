@@ -1,0 +1,24 @@
+{
+    "name": "LayerZero",
+    "description": "LayerZero is an omnichain interoperability protocol that enables seamless communication between different blockchains.",
+    "live": true,
+    "categories": ["Infra::Interoperability"],
+    "addresses": {
+        "EndpointV2": "0x6C7Ab2202C98C4227C5c46f1417D81144DA716Ff",
+        "SendUln302": "0xd682ECF100f6F4284138AA925348633B0611Ae21",
+        "ReceiveUln302": "0xcF1B0F4106B0324F96fEfcC31bA9498caa80701C",
+        "BlockedMessageLib": "0x926984a57b10a3a5c4cfdbac04daaa0309e78932",
+        "LZExecutor": "0x9dB9Ca3305B48F196D18082e91cB64663b13d014",
+        "LZDeadDVN": "0xF49d162484290EAeAd7bb8C2c7E3a6f8f52e32d6"
+    },
+    "info": {
+        "endpointId": 40204,
+        "addressReference": "https://docs.layerzero.network/v2/deployments/deployed-contracts?chains=monad-testnet"
+    },
+    "links": {
+        "project": "https://layerzero.network/",
+        "twitter": "https://x.com/LayerZero_Core",
+        "github": "https://github.com/layerzero-Labs",
+        "docs": "https://docs.layerzero.network/v2"
+    }
+}
