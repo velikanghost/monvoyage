@@ -1,7 +1,7 @@
 {
   "source": "https://tn-ecosystem.monad.xyz/",
   "generated_at": 1762799615.279902,
-  "project_count": 305,
+  "project_count": 316,
   "categories": [
     "AI",
     "Account Abstraction",
@@ -47,34 +47,6 @@
       "social_links": []
     },
     {
-      "name": "AUSD",
-      "slug": "ausd",
-      "project_type": "App/Infra",
-      "description": "Agora is a stablecoin issuer of AUSD, backed 1:1 by cash and cash equivalent reserves managed by VanEck and custodied by State Street.",
-      "categories": [
-        "DeFi",
-        "RWA",
-        "Payments"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67c620f4a0bab10af98e0508_ausd.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67c620f148f4cde61d6cf7fb_ausd%20(1).webp",
-      "site_link": "https://x.com/withAUSD",
-      "social_links": []
-    },
-    {
-      "name": "AZEx",
-      "slug": "azex",
-      "project_type": "App",
-      "description": "Your A-Z DeFi Hub in One Click. Trade any asset as margin with 100x leverage. Multi-Chain Protocol. AI-Powered Copytrading.",
-      "categories": [
-        "DeFi"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67e316cec7faf77a521ebdc3_AZEX-icon-wht-background-300x300.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67e316c93c4aa7bb9abb6b5c_azex%20banner.webp",
-      "site_link": "https://x.com/azex_io",
-      "social_links": []
-    },
-    {
       "name": "Aarna",
       "slug": "aarna",
       "project_type": "App",
@@ -100,6 +72,19 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68a7302c461b97699ee0f421_Profile%20Pic%20(7)%20(1).webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68a730300920180531983ce9_x_cover_business%20(1).webp",
       "site_link": "https://x.com/AccountableData",
+      "social_links": []
+    },
+    {
+      "name": "Across",
+      "slug": "across",
+      "project_type": "Infra",
+      "description": "Across is the first intent-based crosschain bridge protocol. It's fast, cheap, and secure. Powering $30B+ in volume for 4M+ users.",
+      "categories": [
+        "Cross-Chain"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68e035994e3c2ccadb2a907a_X-Logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68e035994e3c2ccadb2a907d_X-Banner-1500x500-.webp",
+      "site_link": "https://x.com/AcrossProtocol",
       "social_links": []
     },
     {
@@ -291,6 +276,21 @@
       "social_links": []
     },
     {
+      "name": "AUSD",
+      "slug": "ausd",
+      "project_type": "App/Infra",
+      "description": "Agora is a stablecoin issuer of AUSD, backed 1:1 by cash and cash equivalent reserves managed by VanEck and custodied by State Street.",
+      "categories": [
+        "DeFi",
+        "RWA",
+        "Payments"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67c620f4a0bab10af98e0508_ausd.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67c620f148f4cde61d6cf7fb_ausd%20(1).webp",
+      "site_link": "https://x.com/withAUSD",
+      "social_links": []
+    },
+    {
       "name": "Azaar",
       "slug": "azaar",
       "project_type": "App",
@@ -301,6 +301,19 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91170f43c1f7d17690959_Azaar_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91173b0307a90b7b1b0c4_Azaar_banner.webp",
       "site_link": "https://x.com/AzaarExchange",
+      "social_links": []
+    },
+    {
+      "name": "AZEx",
+      "slug": "azex",
+      "project_type": "App",
+      "description": "Your A-Z DeFi Hub in One Click. Trade any asset as margin with 100x leverage. Multi-Chain Protocol. AI-Powered Copytrading.",
+      "categories": [
+        "DeFi"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67e316cec7faf77a521ebdc3_AZEX-icon-wht-background-300x300.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67e316c93c4aa7bb9abb6b5c_azex%20banner.webp",
+      "site_link": "https://x.com/azex_io",
       "social_links": []
     },
     {
@@ -453,33 +466,6 @@
       "social_links": []
     },
     {
-      "name": "BlockStreet",
-      "slug": "blockstreet",
-      "project_type": "Infra",
-      "description": "Unified liquidity layer for tokenized equities - delivering secure settlement, deep liquidity, and institutional-grade efficiency.",
-      "categories": [
-        "Other Infra"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68b20be38a9f4a238e4ca802_monad-logo-400_400.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68b20be38a9f4a238e4ca7ef_monad-bg-1500_500.webp",
-      "site_link": "https://x.com/blockst_hq",
-      "social_links": []
-    },
-    {
-      "name": "BlockVision",
-      "slug": "blockvision",
-      "project_type": "Infra",
-      "description": "BlockVision provides blockchain infrastructure services, offering APIs, RPC services to empower developers and users alike.",
-      "categories": [
-        "Indexer",
-        "Analytics"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b911e5ebe3a25cc1bc45a5_BlockVision_logo.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b911e2de4da514b324a0d5_BlockVision_banner.webp",
-      "site_link": "https://x.com/blockvisionhq",
-      "social_links": []
-    },
-    {
       "name": "Blockdaemon",
       "slug": "blockdaemon",
       "project_type": "Infra",
@@ -505,6 +491,33 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b911fd7f3041834a53238c_Blocklive_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b911ffebe3a25cc1bc5a93_Blocklive_banner.webp",
       "site_link": "https://x.com/blocklive_/",
+      "social_links": []
+    },
+    {
+      "name": "BlockStreet",
+      "slug": "blockstreet",
+      "project_type": "Infra",
+      "description": "Unified liquidity layer for tokenized equities - delivering secure settlement, deep liquidity, and institutional-grade efficiency.",
+      "categories": [
+        "Other Infra"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68b20be38a9f4a238e4ca802_monad-logo-400_400.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68b20be38a9f4a238e4ca7ef_monad-bg-1500_500.webp",
+      "site_link": "https://x.com/blockst_hq",
+      "social_links": []
+    },
+    {
+      "name": "BlockVision",
+      "slug": "blockvision",
+      "project_type": "Infra",
+      "description": "BlockVision provides blockchain infrastructure services, offering APIs, RPC services to empower developers and users alike.",
+      "categories": [
+        "Indexer",
+        "Analytics"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b911e5ebe3a25cc1bc45a5_BlockVision_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b911e2de4da514b324a0d5_BlockVision_banner.webp",
+      "site_link": "https://x.com/blockvisionhq",
       "social_links": []
     },
     {
@@ -546,35 +559,6 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b912533b92e175eb004a8c_Bybit%20Web3%20Wallet_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91252b76bbf068dcd1c8c_Bybit%20Web3%20Wallet_banner.webp",
       "site_link": "https://x.com/Bybit_Web3",
-      "social_links": []
-    },
-    {
-      "name": "CPLX",
-      "slug": "cplx",
-      "project_type": "App",
-      "description": "Institutional-grade DeFi derivatives exchange. Unified liquidity pools & pioneering RWA products. Built by TradFi exchange pioneers.",
-      "categories": [
-        "DeFi",
-        "RWA"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6883e31a7a1418a2a81fc351_x_logo_4.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6883e31a7a1418a2a81fc34e_x_banner_3.webp",
-      "site_link": "https://x.com/cplx_io",
-      "social_links": []
-    },
-    {
-      "name": "CULT",
-      "slug": "cult",
-      "project_type": "App",
-      "description": "Cult is where culture meets crypto. A new reputation system rewards loyalty for holders, tokens, and creators alike.",
-      "categories": [
-        "Social",
-        "DeFi",
-        "AI"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/688e9f8173066eb8c97da18d_cult%20logo%20.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/688e9f87183ff7b96a8a5684_cult%20banner.webp",
-      "site_link": "https://x.com/cultdottrade",
       "social_links": []
     },
     {
@@ -716,19 +700,6 @@
       "social_links": []
     },
     {
-      "name": "CoNFT",
-      "slug": "conft",
-      "project_type": "App",
-      "description": "coNFT.app-NFT aggregator where users can create/trade NFT and register web3 domains.120k MAU. 1M+ mints. 70k+ web3 registrations.",
-      "categories": [
-        "NFT"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67c6400453e750640690be80_conft.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67cb771049486c6eb222c702_conft%20(1).webp",
-      "site_link": "https://x.com/ConftApp",
-      "social_links": []
-    },
-    {
       "name": "Codex",
       "slug": "codex",
       "project_type": "Infra",
@@ -758,6 +729,19 @@
       "social_links": []
     },
     {
+      "name": "CoNFT",
+      "slug": "conft",
+      "project_type": "App",
+      "description": "coNFT.app-NFT aggregator where users can create/trade NFT and register web3 domains.120k MAU. 1M+ mints. 70k+ web3 registrations.",
+      "categories": [
+        "NFT"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67c6400453e750640690be80_conft.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67cb771049486c6eb222c702_conft%20(1).webp",
+      "site_link": "https://x.com/ConftApp",
+      "social_links": []
+    },
+    {
       "name": "Covenant",
       "slug": "covenant",
       "project_type": "App",
@@ -768,6 +752,20 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91321ea5cc3512a8be053_Covenant_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9131fa3562438106116ea_Covenant_banner.webp",
       "site_link": "https://x.com/covenantFi",
+      "social_links": []
+    },
+    {
+      "name": "CPLX",
+      "slug": "cplx",
+      "project_type": "App",
+      "description": "Institutional-grade DeFi derivatives exchange. Unified liquidity pools & pioneering RWA products. Built by TradFi exchange pioneers.",
+      "categories": [
+        "DeFi",
+        "RWA"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6883e31a7a1418a2a81fc351_x_logo_4.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6883e31a7a1418a2a81fc34e_x_banner_3.webp",
+      "site_link": "https://x.com/cplx_io",
       "social_links": []
     },
     {
@@ -794,6 +792,21 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91338de4da514b3258311_Crystal_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91336a1ed529049cd029d_Crystal_banner.webp",
       "site_link": "https://x.com/CrystalExch",
+      "social_links": []
+    },
+    {
+      "name": "CULT",
+      "slug": "cult",
+      "project_type": "App",
+      "description": "Cult is where culture meets crypto. A new reputation system rewards loyalty for holders, tokens, and creators alike.",
+      "categories": [
+        "Social",
+        "DeFi",
+        "AI"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/688e9f8173066eb8c97da18d_cult%20logo%20.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/688e9f87183ff7b96a8a5684_cult%20banner.webp",
+      "site_link": "https://x.com/cultdottrade",
       "social_links": []
     },
     {
@@ -853,6 +866,19 @@
       "social_links": []
     },
     {
+      "name": "DashX",
+      "slug": "dashx",
+      "project_type": "App",
+      "description": "DashX: One-click payments for everything. A DeFi platform with the fastest cross-chain transactions, ramps, and rewards!",
+      "categories": [
+        "DeFi"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67bebd535f9f62cdf559f308_dashx%20logo.webp",
+      "banner": "https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg",
+      "site_link": "https://x.com/dashxhq",
+      "social_links": []
+    },
+    {
       "name": "DAU Cards",
       "slug": "dau-cards",
       "project_type": "App",
@@ -864,47 +890,6 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b913a278f79de0e7a62b38_DAU%20Cards_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b913a4ea5cc3512a8c6485_DAU%20Cards_banner.webp",
       "site_link": "https://x.com/DAUCards",
-      "social_links": []
-    },
-    {
-      "name": "DRKVRS",
-      "slug": "drkvrs",
-      "project_type": "App",
-      "description": "DRKVRS is a Web3 Multiplayer Action RPG game with innovative mechanics, set in a dystopian and brutalist world.",
-      "categories": [
-        "Gaming",
-        "AI",
-        "NFT"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67d3a1aa464cdce0ecbee499_drkvrs%20jpg.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67d3a1aea4d25d753f9215c7_drkvrs%20banner%20(1).webp",
-      "site_link": "https://x.com/drkvrs",
-      "social_links": []
-    },
-    {
-      "name": "DRPC",
-      "slug": "drpc",
-      "project_type": "Infra",
-      "description": "dRPC is an off-chain routing protocol for delivering reliable API infrastructure leveraging a distributed network of nodes.",
-      "categories": [
-        "RPC"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b913b7b9188e59b9a50568_DRPC_logo.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b913b9c0e02b5b7bef2682_DRPC_banner.webp",
-      "site_link": "https://x.com/drpcorg",
-      "social_links": []
-    },
-    {
-      "name": "DashX",
-      "slug": "dashx",
-      "project_type": "App",
-      "description": "DashX: One-click payments for everything. A DeFi platform with the fastest cross-chain transactions, ramps, and rewards!",
-      "categories": [
-        "DeFi"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67bebd535f9f62cdf559f308_dashx%20logo.webp",
-      "banner": "https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg",
-      "site_link": "https://x.com/dashxhq",
       "social_links": []
     },
     {
@@ -935,6 +920,19 @@
       "social_links": []
     },
     {
+      "name": "dFusion AI",
+      "slug": "dfusion-ai",
+      "project_type": "App",
+      "description": "dFusion unlocks private and domain specific data into enriched, curated datasets - fueling accurate, next-gen AI models.",
+      "categories": [
+        "AI"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68cebe8f33d4d7940f9a4dfb_dfusion%20logo%20.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68cebe9400e8d42c392200cd_dfusion%20ai%20background.webp",
+      "site_link": "https://x.com/dfusionai",
+      "social_links": []
+    },
+    {
       "name": "Dialect",
       "slug": "dialect",
       "project_type": "Infra",
@@ -960,6 +958,19 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b913ef859d08f0b8d743ef_Diffuse_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b913edb126dbefee70369b_Diffuse_banner.webp",
       "site_link": "https://x.com/DiffuseFi",
+      "social_links": []
+    },
+    {
+      "name": "Dirol",
+      "slug": "dirol",
+      "project_type": "App",
+      "description": "Dirol is a native DeFi Hub on Monad with a full suite of DeFi features. You can do everything on Dirol.",
+      "categories": [
+        "DeFi"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67cb75a360ac4f826e2f7ec3_photo_2025-03-03_14-07-29.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67cb776ce2f730919914482f_Dirol%20Banner%20(1).webp",
+      "site_link": "https://x.com/DirolProtocol",
       "social_links": []
     },
     {
@@ -1016,6 +1027,34 @@
       "social_links": []
     },
     {
+      "name": "DRKVRS",
+      "slug": "drkvrs",
+      "project_type": "App",
+      "description": "DRKVRS is a Web3 Multiplayer Action RPG game with innovative mechanics, set in a dystopian and brutalist world.",
+      "categories": [
+        "Gaming",
+        "AI",
+        "NFT"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67d3a1aa464cdce0ecbee499_drkvrs%20jpg.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67d3a1aea4d25d753f9215c7_drkvrs%20banner%20(1).webp",
+      "site_link": "https://x.com/drkvrs",
+      "social_links": []
+    },
+    {
+      "name": "DRPC",
+      "slug": "drpc",
+      "project_type": "Infra",
+      "description": "dRPC is an off-chain routing protocol for delivering reliable API infrastructure leveraging a distributed network of nodes.",
+      "categories": [
+        "RPC"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b913b7b9188e59b9a50568_DRPC_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b913b9c0e02b5b7bef2682_DRPC_banner.webp",
+      "site_link": "https://x.com/drpcorg",
+      "social_links": []
+    },
+    {
       "name": "Dune",
       "slug": "dune",
       "project_type": "Infra",
@@ -1069,29 +1108,29 @@
       "social_links": []
     },
     {
-      "name": "ELFi",
-      "slug": "elfi",
-      "project_type": "App",
-      "description": "ELFi is the first DEX with ultra portfolio margin & zero-risk stablecoin pool. No KYC. $1.62B volume, 32K users, up to 1000x leverage.",
+      "name": "earnAUSD",
+      "slug": "earnausd",
+      "project_type": "App/Infra",
+      "description": "Agora is a stablecoin issuer of AUSD, backed 1:1 by cash and cash equivalent reserves managed by VanEck and custodied by State Street.",
       "categories": [
         "DeFi"
       ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68474446020515eb7453f848_logo.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68474446020515eb7453f84b_banner.webp",
-      "site_link": "https://x.com/ELFiProtocol",
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67c620f4a0bab10af98e0508_ausd.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67c620f148f4cde61d6cf7fb_ausd%20(1).webp",
+      "site_link": "https://x.com/withAUSD",
       "social_links": []
     },
     {
-      "name": "EOracle",
-      "slug": "eoracle",
-      "project_type": "Infra",
-      "description": "eOracle provides decentralized price feeds through a cryptoeconomically secure oracle network.",
+      "name": "Eisen",
+      "slug": "eisen",
+      "project_type": "App",
+      "description": "Eisen is a multichain DEX aggregator expanding with V2 to unify CEX/DEX spot &amp; derivatives for advanced DeFi strategies.",
       "categories": [
-        "Oracle"
+        "DeFi"
       ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b914331e79a03f6da4a7b7_EOracle_logo.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b914357f3041834a54a50e_EOracle_banner.webp",
-      "site_link": "https://x.com/eoracle_network",
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6893bd214907ffb0bd6905ae_Eisen_Symbol.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6893bd214907ffb0bd6905b6_x-banner.webp",
+      "site_link": "https://x.com/EisenLabs",
       "social_links": []
     },
     {
@@ -1105,6 +1144,19 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6893bd214907ffb0bd6905ae_Eisen_Symbol.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6893bd214907ffb0bd6905b6_x-banner.webp",
       "site_link": "https://x.com/EisenLabs",
+      "social_links": []
+    },
+    {
+      "name": "ELFi",
+      "slug": "elfi",
+      "project_type": "App",
+      "description": "ELFi is the first DEX with ultra portfolio margin & zero-risk stablecoin pool. No KYC. $1.62B volume, 32K users, up to 1000x leverage.",
+      "categories": [
+        "DeFi"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68474446020515eb7453f848_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68474446020515eb7453f84b_banner.webp",
+      "site_link": "https://x.com/ELFiProtocol",
       "social_links": []
     },
     {
@@ -1151,6 +1203,19 @@
       "social_links": []
     },
     {
+      "name": "EOracle",
+      "slug": "eoracle",
+      "project_type": "Infra",
+      "description": "eOracle provides decentralized price feeds through a cryptoeconomically secure oracle network.",
+      "categories": [
+        "Oracle"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b914331e79a03f6da4a7b7_EOracle_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b914357f3041834a54a50e_EOracle_banner.webp",
+      "site_link": "https://x.com/eoracle_network",
+      "social_links": []
+    },
+    {
       "name": "Epoch Protocol",
       "slug": "epoch-protocol",
       "project_type": "Infra",
@@ -1190,34 +1255,6 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9148448ee25af9bdeb78a_Euler_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9148784cbdc367d624331_Euler_banner.webp",
       "site_link": "https://x.com/eulerfinance/",
-      "social_links": []
-    },
-    {
-      "name": "FUKU",
-      "slug": "fuku",
-      "project_type": "App",
-      "description": "A Defi Saving protocol on Monad, blending savings with the excitement of betting and winning prizes without risking your deposit.",
-      "categories": [
-        "DeFi",
-        "Betting"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67c4e7cee99fbe7860f5ac2d_fuku.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67c4e7d195901a1d7451f9d8_fuku%20b.webp",
-      "site_link": "https://x.com/Fuku_nad",
-      "social_links": []
-    },
-    {
-      "name": "FWX",
-      "slug": "fwx",
-      "project_type": "App",
-      "description": "FWX: Permissionless leverage trading on DEX. Add any token, create a lending pool, and margin trade. Lenders are protected via hedging.",
-      "categories": [
-        "DeFi",
-        "Prediction Market"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6847444652fc2d7b6454b30f_fwx-logo.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6847444652fc2d7b6454b312_fwx-banner.webp",
-      "site_link": "https://x.com/fwxfinance",
       "social_links": []
     },
     {
@@ -1372,16 +1409,31 @@
       "social_links": []
     },
     {
-      "name": "GM Agents",
-      "slug": "gm-agents",
+      "name": "FUKU",
+      "slug": "fuku",
       "project_type": "App",
-      "description": "GM Agents is an AI super app that brings together a wide range of AI agents â for text, image, audio, and video.",
+      "description": "A Defi Saving protocol on Monad, blending savings with the excitement of betting and winning prizes without risking your deposit.",
       "categories": [
-        "AI"
+        "DeFi",
+        "Betting"
       ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/687816d9af2f69162a3cf9fc_gm%20logo%20_400x400.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/687816d6dfa57cb6f0341205_gm%20background%201500x500%20(1).webp",
-      "site_link": "https://x.com/GMAgents_AI",
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67c4e7cee99fbe7860f5ac2d_fuku.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67c4e7d195901a1d7451f9d8_fuku%20b.webp",
+      "site_link": "https://x.com/Fuku_nad",
+      "social_links": []
+    },
+    {
+      "name": "FWX",
+      "slug": "fwx",
+      "project_type": "App",
+      "description": "FWX: Permissionless leverage trading on DEX. Add any token, create a lending pool, and margin trade. Lenders are protected via hedging.",
+      "categories": [
+        "DeFi",
+        "Prediction Market"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6847444652fc2d7b6454b30f_fwx-logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6847444652fc2d7b6454b312_fwx-banner.webp",
+      "site_link": "https://x.com/fwxfinance",
       "social_links": []
     },
     {
@@ -1421,6 +1473,19 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91506e21ffe4d1051b443_Gateway_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b915055075b90f1687d2bc_Gateway_banner.webp",
       "site_link": "https://x.com/Gateway_xyz",
+      "social_links": []
+    },
+    {
+      "name": "Gearbox",
+      "slug": "gearbox",
+      "project_type": "App",
+      "description": "Gearbox is DeFi’s credit layer: permissionless lending for institutional-grade efficiency and yield.",
+      "categories": [
+        "DeFi"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68f69b4cbcdd9c8e6c15073a_ISu5WSUS_400x400.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68f69b4cbcdd9c8e6c15073d_1500x500.webp",
+      "site_link": "https://x.com/GearboxProtocol",
       "social_links": []
     },
     {
@@ -1480,30 +1545,16 @@
       "social_links": []
     },
     {
-      "name": "GoPlus",
-      "slug": "goplus",
-      "project_type": "Infra",
-      "description": "Redefining Web3 user security with its Modular User Security Layer, offering open access to security intelligence and firewall services.",
+      "name": "GM Agents",
+      "slug": "gm-agents",
+      "project_type": "App",
+      "description": "GM Agents is an AI super app that brings together a wide range of AI agents â for text, image, audio, and video.",
       "categories": [
-        "Other Infra"
+        "AI"
       ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9152e89130464ea40fe38_GoPlus_logo.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9152dab78b729a922069b_GoPlus_banner.webp",
-      "site_link": "https://x.com/goplussecurity",
-      "social_links": []
-    },
-    {
-      "name": "GoldRush by Covalent",
-      "slug": "goldrush-by-covalent",
-      "project_type": "Infra",
-      "description": "Foundational multichain data APIs and toolkits for easy web3 development across 100+ chains including Monad.",
-      "categories": [
-        "Indexer",
-        "Dev Tooling"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9153489130464ea41015c_GoldRush%20by%20Covalent_logo.webp",
-      "banner": "https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg",
-      "site_link": "https://x.com/Covalent_HQ",
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/687816d9af2f69162a3cf9fc_gm%20logo%20_400x400.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/687816d6dfa57cb6f0341205_gm%20background%201500x500%20(1).webp",
+      "site_link": "https://x.com/GMAgents_AI",
       "social_links": []
     },
     {
@@ -1521,6 +1572,20 @@
       "social_links": []
     },
     {
+      "name": "GoldRush by Covalent",
+      "slug": "goldrush-by-covalent",
+      "project_type": "Infra",
+      "description": "Foundational multichain data APIs and toolkits for easy web3 development across 100+ chains including Monad.",
+      "categories": [
+        "Indexer",
+        "Dev Tooling"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9153489130464ea41015c_GoldRush%20by%20Covalent_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/plugins/Basic/assets/placeholder.60f9b1840c.svg",
+      "site_link": "https://x.com/Covalent_HQ",
+      "social_links": []
+    },
+    {
       "name": "Goldsky",
       "slug": "goldsky",
       "project_type": "Infra",
@@ -1532,6 +1597,19 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9154c5075b90f1688042c_Goldsky_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b915498330a99a870e9e79_Goldsky_banner.webp",
       "site_link": "https://x.com/goldskyio",
+      "social_links": []
+    },
+    {
+      "name": "GoPlus",
+      "slug": "goplus",
+      "project_type": "Infra",
+      "description": "Redefining Web3 user security with its Modular User Security Layer, offering open access to security intelligence and firewall services.",
+      "categories": [
+        "Other Infra"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9152e89130464ea40fe38_GoPlus_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9152dab78b729a922069b_GoPlus_banner.webp",
+      "site_link": "https://x.com/goplussecurity",
       "social_links": []
     },
     {
@@ -1646,32 +1724,6 @@
       "social_links": []
     },
     {
-      "name": "INFINIT",
-      "slug": "infinit",
-      "project_type": "App",
-      "description": "INFINIT is the first DeFi Abstraction Layer that enables permissionless creation of DeFi Agents to simplify on-chain transactions.",
-      "categories": [
-        "DeFi"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9158c48ee25af9bdfbec0_INFINIT_logo.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9158bf6998cf242068ccf_INFINIT_banner.webp",
-      "site_link": "https://x.com/infinit_labs",
-      "social_links": []
-    },
-    {
-      "name": "IZUMi Finance",
-      "slug": "izumi-finance",
-      "project_type": "App",
-      "description": "iZUMi Finance is a multi-chain DeFi protocol providing one-stop DEX-as-a-Service (DaaS).",
-      "categories": [
-        "DeFi"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b915992a3730e911b7264c_IZUMi%20Finance_logo.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91596779fac86351afd4c_IZUMi%20Finance_banner.webp",
-      "site_link": "https://x.com/izumi_Finance",
-      "social_links": []
-    },
-    {
       "name": "Impossible Finance",
       "slug": "impossible-finance",
       "project_type": "App",
@@ -1697,6 +1749,32 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68d6e931940f75ea0a8764e7_Frame-777.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68d6e931940f75ea0a8764e4_IndexCover.webp",
       "site_link": "https://x.com/indexnetwork_",
+      "social_links": []
+    },
+    {
+      "name": "INFINIT",
+      "slug": "infinit",
+      "project_type": "App",
+      "description": "INFINIT is the first DeFi Abstraction Layer that enables permissionless creation of DeFi Agents to simplify on-chain transactions.",
+      "categories": [
+        "DeFi"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9158c48ee25af9bdfbec0_INFINIT_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9158bf6998cf242068ccf_INFINIT_banner.webp",
+      "site_link": "https://x.com/infinit_labs",
+      "social_links": []
+    },
+    {
+      "name": "IZUMi Finance",
+      "slug": "izumi-finance",
+      "project_type": "App",
+      "description": "iZUMi Finance is a multi-chain DeFi protocol providing one-stop DEX-as-a-Service (DaaS).",
+      "categories": [
+        "DeFi"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b915992a3730e911b7264c_IZUMi%20Finance_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91596779fac86351afd4c_IZUMi%20Finance_banner.webp",
+      "site_link": "https://x.com/izumi_Finance",
       "social_links": []
     },
     {
@@ -1729,21 +1807,6 @@
       "social_links": []
     },
     {
-      "name": "KINETK",
-      "slug": "kinetk",
-      "project_type": "App",
-      "description": "Invisible watermarking, agentic AI detection & on-chain registration â building IP infrastructure for the future of digital creativity",
-      "categories": [
-        "AI",
-        "RWA",
-        "Other Apps"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68ceb780c0d89aa11d07ec76_KINETK-Logo.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68ceba28a6e940587e1a4ae5_kinetk%20background.webp",
-      "site_link": "https://x.com/KINETK_AI",
-      "social_links": []
-    },
-    {
       "name": "Kansei",
       "slug": "kansei",
       "project_type": "App",
@@ -1767,6 +1830,21 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b915b5859d08f0b8d869df_KiloEx_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b915b689130464ea416042_KiloEx_banner.webp",
       "site_link": "https://x.com/KiloEx_perp",
+      "social_links": []
+    },
+    {
+      "name": "KINETK",
+      "slug": "kinetk",
+      "project_type": "App",
+      "description": "Invisible watermarking, agentic AI detection & on-chain registration â building IP infrastructure for the future of digital creativity",
+      "categories": [
+        "AI",
+        "RWA",
+        "Other Apps"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68ceb780c0d89aa11d07ec76_KINETK-Logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68ceba28a6e940587e1a4ae5_kinetk%20background.webp",
+      "site_link": "https://x.com/KINETK_AI",
       "social_links": []
     },
     {
@@ -1820,6 +1898,19 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b915d16561ec94bfa425a1_Kizzy_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b915d286bf1f948b421241_Kizzy_banner.webp",
       "site_link": "https://x.com/kizzymobile",
+      "social_links": []
+    },
+    {
+      "name": "Kodeus",
+      "slug": "kodeus",
+      "project_type": "App",
+      "description": "Kodeus lets users build on-chain Agentic apps from prompts - powered by LLM orchestration, 4k+ tools, and IP monetization.",
+      "categories": [
+        "AI"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68ceb77ff5972224015058a3_kodeus-favicon-white.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68ceb77ff5972224015058a6_twitter-banner.webp",
+      "site_link": "https://x.com/TheKodeusLabs",
       "social_links": []
     },
     {
@@ -1890,45 +1981,16 @@
       "social_links": []
     },
     {
-      "name": "LEVR.bet",
-      "slug": "levr-bet",
-      "project_type": "App",
-      "description": "Leverage Sports Betting with Fully Liquid Positions.",
-      "categories": [
-        "DeFi",
-        "Betting"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b915f9779fac86351b4888_LEVR.bet_logo.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b915fa9fa4892d6236d66a_LEVR.bet_banner.webp",
-      "site_link": "https://x.com/levr_bet",
-      "social_links": []
-    },
-    {
-      "name": "LFJ",
-      "slug": "lfj",
-      "project_type": "App",
-      "description": "The onchain trading platform built for winners. One-stop DEX, Aggregator & Screener for Monad. Discover & buy every token at the best prices.",
-      "categories": [
-        "DeFi"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91601c0e02b5b7bf0bccc_LFJ_logo.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b916025d51b1bcd91c3c36_LFJ_banner.webp",
-      "site_link": "https://x.com/LFJ_gg",
-      "social_links": []
-    },
-    {
-      "name": "LI.FI",
-      "slug": "li-fi",
+      "name": "Layerhub",
+      "slug": "layerhub",
       "project_type": "Infra",
-      "description": "One API for seamless swaps & bridging across EVM, Solana and Bitcoin. Integrated by Robinhood Wallet, MetaMask, Phantom + 600 partners.",
+      "description": "LayerHub is an on-chain analytics platform offering dashboards, wallet insights, leaderboards, and ecosystem tracking tools.",
       "categories": [
-        "Cross-Chain",
-        "Dev Tooling",
-        "Account Abstraction"
+        "Analytics"
       ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68ceb780e6d195deeeed6da7_lifi_pfp.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68ceb780e6d195deeeed6da4_lifi_background.webp",
-      "site_link": "https://x.com/lifiprotocol",
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68f69b4cc576152375cc74ac_group_1000002444_1x.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68f69b4cc576152375cc74af_image_156.webp",
+      "site_link": "https://x.com/layerhub",
       "social_links": []
     },
     {
@@ -1942,19 +2004,6 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9160a6561ec94bfa44b63_LayerZero_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9160b3a3a575251c4a40a_LayerZero_banner.webp",
       "site_link": "https://x.com/LayerZero_Core",
-      "social_links": []
-    },
-    {
-      "name": "Layerhub",
-      "slug": "layerhub",
-      "project_type": "Infra",
-      "description": "LayerHub is an on-chain analytics platform offering dashboards, wallet insights, leaderboards, and ecosystem tracking tools.",
-      "categories": [
-        "Analytics"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68f69b4cc576152375cc74ac_group_1000002444_1x.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68f69b4cc576152375cc74af_image_156.webp",
-      "site_link": "https://x.com/layerhub",
       "social_links": []
     },
     {
@@ -1996,6 +2045,48 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68fe71a6e79a1b8bcd68fa36_logo-400x400.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68fe71a6e79a1b8bcd68fa33_background-1500x500.webp",
       "site_link": "https://x.com/LeverUp_xyz",
+      "social_links": []
+    },
+    {
+      "name": "LEVR.bet",
+      "slug": "levr-bet",
+      "project_type": "App",
+      "description": "Leverage Sports Betting with Fully Liquid Positions.",
+      "categories": [
+        "DeFi",
+        "Betting"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b915f9779fac86351b4888_LEVR.bet_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b915fa9fa4892d6236d66a_LEVR.bet_banner.webp",
+      "site_link": "https://x.com/levr_bet",
+      "social_links": []
+    },
+    {
+      "name": "LFJ",
+      "slug": "lfj",
+      "project_type": "App",
+      "description": "The onchain trading platform built for winners. One-stop DEX, Aggregator & Screener for Monad. Discover & buy every token at the best prices.",
+      "categories": [
+        "DeFi"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91601c0e02b5b7bf0bccc_LFJ_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b916025d51b1bcd91c3c36_LFJ_banner.webp",
+      "site_link": "https://x.com/LFJ_gg",
+      "social_links": []
+    },
+    {
+      "name": "LI.FI",
+      "slug": "li-fi",
+      "project_type": "Infra",
+      "description": "One API for seamless swaps & bridging across EVM, Solana and Bitcoin. Integrated by Robinhood Wallet, MetaMask, Phantom + 600 partners.",
+      "categories": [
+        "Cross-Chain",
+        "Dev Tooling",
+        "Account Abstraction"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68ceb780e6d195deeeed6da7_lifi_pfp.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68ceb780e6d195deeeed6da4_lifi_background.webp",
+      "site_link": "https://x.com/lifiprotocol",
       "social_links": []
     },
     {
@@ -2069,6 +2160,19 @@
       "social_links": []
     },
     {
+      "name": "LumiterraGame",
+      "slug": "lumiterragame",
+      "project_type": "App",
+      "description": "Lumiterra is the first agentic interactive multiplayer sandbox",
+      "categories": [
+        "AI"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/689f814d36a7d97c9a6b7bd8_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/689f814d36a7d97c9a6b7bdb_background.webp",
+      "site_link": "https://x.com/LumiterraGame",
+      "social_links": []
+    },
+    {
       "name": "M0narch",
       "slug": "m0narch",
       "project_type": "App",
@@ -2080,19 +2184,6 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6883e31a85ccb6f309a67727_4-01.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6883e31a85ccb6f309a67734_1500500.webp",
       "site_link": "https://x.com/MonadM0narch",
-      "social_links": []
-    },
-    {
-      "name": "MERV",
-      "slug": "merv",
-      "project_type": "App",
-      "description": "IP creation platform powered by AI.",
-      "categories": [
-        "AI"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9164ba00e125f94a0513b_MERV_logo.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9164611a6f589667a3393_MERV_banner.webp",
-      "site_link": "https://x.com/merv_wtf",
       "social_links": []
     },
     {
@@ -2218,6 +2309,19 @@
       "social_links": []
     },
     {
+      "name": "MERV",
+      "slug": "merv",
+      "project_type": "App",
+      "description": "IP creation platform powered by AI.",
+      "categories": [
+        "AI"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9164ba00e125f94a0513b_MERV_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9164611a6f589667a3393_MERV_banner.webp",
+      "site_link": "https://x.com/merv_wtf",
+      "social_links": []
+    },
+    {
       "name": "Meta Leap",
       "slug": "meta-leap",
       "project_type": "App",
@@ -2301,19 +2405,6 @@
       "social_links": []
     },
     {
-      "name": "MonadExplorer by BlockVision",
-      "slug": "monad-explorer-by-blockvision",
-      "project_type": "Infra",
-      "description": "MonadExplorer is a block explorer built by BlockVision. It helps users analyze transactions, contracts, and network activity on Monad.",
-      "categories": [
-        "Analytics"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b916a989130464ea421461_MonadExplorer%20by%20BlockVision_logo.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b916ab89130464ea4215e4_MonadExplorer%20by%20BlockVision_banner.webp",
-      "site_link": "https://x.com/blockvisionhq",
-      "social_links": []
-    },
-    {
       "name": "Monadata AI",
       "slug": "monadata-ai",
       "project_type": "App",
@@ -2324,6 +2415,19 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b916ba84cbdc367d63b09c_Monadata%20AI_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b916bcb126dbefee7211ec_Monadata%20AI_banner.webp",
       "site_link": "https://x.com/monadata_ai",
+      "social_links": []
+    },
+    {
+      "name": "MonadExplorer by BlockVision",
+      "slug": "monad-explorer-by-blockvision",
+      "project_type": "Infra",
+      "description": "MonadExplorer is a block explorer built by BlockVision. It helps users analyze transactions, contracts, and network activity on Monad.",
+      "categories": [
+        "Analytics"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b916a989130464ea421461_MonadExplorer%20by%20BlockVision_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b916ab89130464ea4215e4_MonadExplorer%20by%20BlockVision_banner.webp",
+      "site_link": "https://x.com/blockvisionhq",
       "social_links": []
     },
     {
@@ -2439,47 +2543,6 @@
       "social_links": []
     },
     {
-      "name": "NADSA",
-      "slug": "nadsa",
-      "project_type": "App",
-      "description": "NADSA is the purpose-built command center for seamless exploration on Monad.",
-      "categories": [
-        "DeFi",
-        "Gaming"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68b20be49797d18c63a72c2f_nadsa-logo.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68b20be49797d18c63a72c2c_nadsa-banner.webp",
-      "site_link": "https://x.com/0xNADSA",
-      "social_links": []
-    },
-    {
-      "name": "NFTs2Me",
-      "slug": "nfts2me",
-      "project_type": "App",
-      "description": "NFTs2Me is a user-friendly comprehensive platform to create, deploy and manage your NFT collection on Monad, 100% free.",
-      "categories": [
-        "NFT",
-        "Social"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b917409fa4892d6237dc33_NFTs2Me_logo.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91741ab78b729a9235c7d_NFTs2Me_banner.webp",
-      "site_link": "https://x.com/NFTs2Me",
-      "social_links": []
-    },
-    {
-      "name": "NXTchain",
-      "slug": "nxtchain",
-      "project_type": "App",
-      "description": "NXTchain empowers anyone to join the decentralized cloud through plug-and-play devices or data center ownership.",
-      "categories": [
-        "DePIN"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68f69b4c2914de7af9a367b0_NXTchain_Monad_LOGO.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68f69b4c2914de7af9a367b3_NXTchain_Monad_BG.webp",
-      "site_link": "https://x.com/NXT_chain",
-      "social_links": []
-    },
-    {
       "name": "Nabla Finance",
       "slug": "nabla-finance",
       "project_type": "App",
@@ -2504,6 +2567,20 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91753fc64a6c6e43c16e3_Nad.fun_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91754f9180e8745b48efe_Nad.fun_banner.webp",
       "site_link": "https://x.com/naddotfun",
+      "social_links": []
+    },
+    {
+      "name": "NADSA",
+      "slug": "nadsa",
+      "project_type": "App",
+      "description": "NADSA is the purpose-built command center for seamless exploration on Monad.",
+      "categories": [
+        "DeFi",
+        "Gaming"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68b20be49797d18c63a72c2f_nadsa-logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68b20be49797d18c63a72c2c_nadsa-banner.webp",
+      "site_link": "https://x.com/0xNADSA",
       "social_links": []
     },
     {
@@ -2561,6 +2638,20 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68d6e9319f6a7484c5ec014c_nvr_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68d6e9319f6a7484c5ec0149_1500x500.webp",
       "site_link": "https://x.com/neverland_money",
+      "social_links": []
+    },
+    {
+      "name": "NFTs2Me",
+      "slug": "nfts2me",
+      "project_type": "App",
+      "description": "NFTs2Me is a user-friendly comprehensive platform to create, deploy and manage your NFT collection on Monad, 100% free.",
+      "categories": [
+        "NFT",
+        "Social"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b917409fa4892d6237dc33_NFTs2Me_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91741ab78b729a9235c7d_NFTs2Me_banner.webp",
+      "site_link": "https://x.com/NFTs2Me",
       "social_links": []
     },
     {
@@ -2687,6 +2778,32 @@
       "social_links": []
     },
     {
+      "name": "NXTchain",
+      "slug": "nxtchain",
+      "project_type": "App",
+      "description": "NXTchain empowers anyone to join the decentralized cloud through plug-and-play devices or data center ownership.",
+      "categories": [
+        "DePIN"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68f69b4c2914de7af9a367b0_NXTchain_Monad_LOGO.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68f69b4c2914de7af9a367b3_NXTchain_Monad_BG.webp",
+      "site_link": "https://x.com/NXT_chain",
+      "social_links": []
+    },
+    {
+      "name": "OctoSwap",
+      "slug": "octoswap",
+      "project_type": "App",
+      "description": "OctoSwap offers lightning-fast token swaps and capital-efficient liquidity pools with a user friendly interface.",
+      "categories": [
+        "DeFi"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67ce4ceb5a19b9c6f4206ffa_octoswap%20logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67ce4cf1eb2c11cb1c3b90bc_octoswap.webp",
+      "site_link": "https://x.com/octoswapdex",
+      "social_links": []
+    },
+    {
       "name": "OKX Explorer",
       "slug": "okx-explorer",
       "project_type": "Infra",
@@ -2711,32 +2828,6 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b917c5d052009891789dd4_OKX%20Wallet_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b917c873996311554ef5ae_OKX%20Wallet_banner.webp",
       "site_link": "https://x.com/wallet",
-      "social_links": []
-    },
-    {
-      "name": "OSL Pay",
-      "slug": "osl-pay",
-      "project_type": "Infra",
-      "description": "OSL Pay, the licensed payments arm of OSL Group, delivers secure, compliant digital-to-fiat conversion for global clients.",
-      "categories": [
-        "Onramp"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68fe71a61a4eecacc687e166_D_h84D3s_400x400.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68fe71a61a4eecacc687e171_1500x500-2.webp",
-      "site_link": "https://x.com/oslpay",
-      "social_links": []
-    },
-    {
-      "name": "OctoSwap",
-      "slug": "octoswap",
-      "project_type": "App",
-      "description": "OctoSwap offers lightning-fast token swaps and capital-efficient liquidity pools with a user friendly interface.",
-      "categories": [
-        "DeFi"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67ce4ceb5a19b9c6f4206ffa_octoswap%20logo.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67ce4cf1eb2c11cb1c3b90bc_octoswap.webp",
-      "site_link": "https://x.com/octoswapdex",
       "social_links": []
     },
     {
@@ -2822,6 +2913,19 @@
       "social_links": []
     },
     {
+      "name": "Orochi",
+      "slug": "orochi",
+      "project_type": "Infra",
+      "description": "Orochi Network is the world’s first Verifiable Data Infrastructure, addressing scalability, privacy, and data integrity challenges.",
+      "categories": [
+        "Oracle"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91804e882d110b44cdd60_Orochi%20Network_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b918055075b90f168a20e1_Orochi%20Network_banner.webp",
+      "site_link": "https://x.com/OrochiNetwork",
+      "social_links": []
+    },
+    {
       "name": "Orochi Network",
       "slug": "orochi-network",
       "project_type": "Infra",
@@ -2834,6 +2938,19 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91804e882d110b44cdd60_Orochi%20Network_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b918055075b90f168a20e1_Orochi%20Network_banner.webp",
       "site_link": "https://twitter.com/OrochiNetwork",
+      "social_links": []
+    },
+    {
+      "name": "OSL Pay",
+      "slug": "osl-pay",
+      "project_type": "Infra",
+      "description": "OSL Pay, the licensed payments arm of OSL Group, delivers secure, compliant digital-to-fiat conversion for global clients.",
+      "categories": [
+        "Onramp"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68fe71a61a4eecacc687e166_D_h84D3s_400x400.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68fe71a61a4eecacc687e171_1500x500-2.webp",
+      "site_link": "https://x.com/oslpay",
       "social_links": []
     },
     {
@@ -2861,33 +2978,6 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9180e83477f8bd77d871e_Owlto%20Finance_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9180f6ae7e18300e22899_Owlto%20Finance_banner.webp",
       "site_link": "https://x.com/Owlto_Finance",
-      "social_links": []
-    },
-    {
-      "name": "PLAY Network",
-      "slug": "play-network",
-      "project_type": "App/Infra",
-      "description": "PLAY turbocharges games with crypto rails. Any game, any chain.",
-      "categories": [
-        "Gaming",
-        "Gaming Infra"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9181d8f00b5fa4ab7a863_PLAY%20Network_logo.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9181bab78b729a924a14b_PLAY%20Network_banner.webp",
-      "site_link": "https://x.com/0xplay_network",
-      "social_links": []
-    },
-    {
-      "name": "POINK",
-      "slug": "poink",
-      "project_type": "Infra",
-      "description": "Poink lets users interact with Web3 directly on X (Twitter), helping dapps onboard users directly from X.",
-      "categories": [
-        "Other Infra"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67efe13fe05410f903a927d9_Screenshot%202025-04-03%20at%2012.37.33%E2%80%AFPM.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67efe1413f6ff09f41971a60_1500x500.webp",
-      "site_link": "https://x.com/poinkofficial",
       "social_links": []
     },
     {
@@ -3042,6 +3132,33 @@
       "social_links": []
     },
     {
+      "name": "PLAY Network",
+      "slug": "play-network",
+      "project_type": "App/Infra",
+      "description": "PLAY turbocharges games with crypto rails. Any game, any chain.",
+      "categories": [
+        "Gaming",
+        "Gaming Infra"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9181d8f00b5fa4ab7a863_PLAY%20Network_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9181bab78b729a924a14b_PLAY%20Network_banner.webp",
+      "site_link": "https://x.com/0xplay_network",
+      "social_links": []
+    },
+    {
+      "name": "POINK",
+      "slug": "poink",
+      "project_type": "Infra",
+      "description": "Poink lets users interact with Web3 directly on X (Twitter), helping dapps onboard users directly from X.",
+      "categories": [
+        "Other Infra"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67efe13fe05410f903a927d9_Screenshot%202025-04-03%20at%2012.37.33%E2%80%AFPM.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67efe1413f6ff09f41971a60_1500x500.webp",
+      "site_link": "https://x.com/poinkofficial",
+      "social_links": []
+    },
+    {
       "name": "PolyFlow",
       "slug": "polyflow",
       "project_type": "App",
@@ -3139,6 +3256,19 @@
       "social_links": []
     },
     {
+      "name": "Puffer",
+      "slug": "puffer",
+      "project_type": "App",
+      "description": "Puffer Finance is a leading liquid staking protocol that lets users stake $ETH, receive $pufETH, and access DeFi opportunities.",
+      "categories": [
+        "DeFi"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/684744a42813b10b0fd35bf9_puffer%20.webp",
+      "banner": "",
+      "site_link": "https://x.com/Puffer_Finance",
+      "social_links": []
+    },
+    {
       "name": "Puffer Finance",
       "slug": "puffer-finance",
       "project_type": "App",
@@ -3176,6 +3306,19 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67e316aa60595f10c8613edb_Monda-Logo-400x400.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/682acfc9a3a8f6e2335cda9b_photo_2025-05-08_23-05-50_720.webp",
       "site_link": "https://x.com/PurpsExchange",
+      "social_links": []
+    },
+    {
+      "name": "Pyth",
+      "slug": "pyth",
+      "project_type": "Infra",
+      "description": "The price layer of the global financial market.",
+      "categories": [
+        "Oracle"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9194dd821392f1940877b_Pyth%20Network_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91950d821392f194088b9_Pyth%20Network_banner.webp",
+      "site_link": "https://x.com/PythNetwork",
       "social_links": []
     },
     {
@@ -3247,19 +3390,6 @@
       "social_links": []
     },
     {
-      "name": "RedStone",
-      "slug": "redstone",
-      "project_type": "Infra",
-      "description": "RedStone is the fastest-growing Modular Oracle, specializing in yield-bearing collateral for lending markets, such as LSTs, LRTs and BTCFi.",
-      "categories": [
-        "Oracle"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91983af1ff23f24a96811_RedStone_logo.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9197d89130464ea445896_RedStone_banner.webp",
-      "site_link": "https://x.com/redstone_defi",
-      "social_links": []
-    },
-    {
       "name": "Redbrick",
       "slug": "redbrick",
       "project_type": "App",
@@ -3270,6 +3400,19 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9198c739963115550368b_Redbrick_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9198f6b6cb4307d56797d_Redbrick_banner.webp",
       "site_link": "https://x.com/RedbrickLand",
+      "social_links": []
+    },
+    {
+      "name": "RedStone",
+      "slug": "redstone",
+      "project_type": "Infra",
+      "description": "RedStone is the fastest-growing Modular Oracle, specializing in yield-bearing collateral for lending markets, such as LSTs, LRTs and BTCFi.",
+      "categories": [
+        "Oracle"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91983af1ff23f24a96811_RedStone_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b9197d89130464ea445896_RedStone_banner.webp",
+      "site_link": "https://x.com/redstone_defi",
       "social_links": []
     },
     {
@@ -3393,34 +3536,6 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68781565fc16fe318bea11a7_rumi%20zPdVic8R_400x400.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6878156220a133701406a3ef_rumi%201500x500%20(1).webp",
       "site_link": "https://x.com/RumiLabs_io",
-      "social_links": []
-    },
-    {
-      "name": "SQD",
-      "slug": "sqd",
-      "project_type": "Infra",
-      "description": "SQD enables permissionless, cost-efficient access to petabytes of high-value Web3 data.",
-      "categories": [
-        "Indexer"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b919e49fa4892d62397880_SQD_logo.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b919e36b6cb4307d56a631_SQD_banner.webp",
-      "site_link": "https://x.com/helloSQD",
-      "social_links": []
-    },
-    {
-      "name": "STAGE.fun",
-      "slug": "stage-fun",
-      "project_type": "App",
-      "description": "STAGE.fun is a crowdfunding platform for festivals and events.",
-      "categories": [
-        "Social",
-        "DeFi",
-        "RWA"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6875106c949bec27002cd3da_STAGE-400x400.png",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6875106c949bec27002cd3d7_STAGE-1500x500.png",
-      "site_link": "https://x.com/stagedotfun",
       "social_links": []
     },
     {
@@ -3576,6 +3691,34 @@
       "social_links": []
     },
     {
+      "name": "SQD",
+      "slug": "sqd",
+      "project_type": "Infra",
+      "description": "SQD enables permissionless, cost-efficient access to petabytes of high-value Web3 data.",
+      "categories": [
+        "Indexer"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b919e49fa4892d62397880_SQD_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b919e36b6cb4307d56a631_SQD_banner.webp",
+      "site_link": "https://x.com/helloSQD",
+      "social_links": []
+    },
+    {
+      "name": "STAGE.fun",
+      "slug": "stage-fun",
+      "project_type": "App",
+      "description": "STAGE.fun is a crowdfunding platform for festivals and events.",
+      "categories": [
+        "Social",
+        "DeFi",
+        "RWA"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6875106c949bec27002cd3da_STAGE-400x400.png",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6875106c949bec27002cd3d7_STAGE-1500x500.png",
+      "site_link": "https://x.com/stagedotfun",
+      "social_links": []
+    },
+    {
       "name": "StakeStone",
       "slug": "stakestone",
       "project_type": "Infra",
@@ -3695,6 +3838,19 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91abd859d08f0b8dbe03c_Switchboard_logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67b91abc779fac86351f7774_Switchboard_banner.webp",
       "site_link": "https://x.com/switchboardxyz",
+      "social_links": []
+    },
+    {
+      "name": "Swyrl",
+      "slug": "swyrl",
+      "project_type": "App",
+      "description": "Swyrl is a Monad-native DEX with dual AMMs and liquid staking, aligning users and protocols via ve(3,3)-driven governance.",
+      "categories": [
+        "DeFi"
+      ],
+      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6883e31a5f263ff733767dec_swyrl_logo.webp",
+      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/6883e31a5f263ff733767df3_swyrl_banner-2-.webp",
+      "site_link": "https://x.com/SwyrlFi",
       "social_links": []
     },
     {
@@ -4181,19 +4337,6 @@
       "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67c4e6ee0af49276106f1b75_zona%20logo.webp",
       "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/67c4e6f2fb2041fb4c035f17_zona.webp",
       "site_link": "https://x.com/zona_io",
-      "social_links": []
-    },
-    {
-      "name": "dFusion AI",
-      "slug": "dfusion-ai",
-      "project_type": "App",
-      "description": "dFusion unlocks private and domain specific data into enriched, curated datasets - fueling accurate, next-gen AI models.",
-      "categories": [
-        "AI"
-      ],
-      "logo": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68cebe8f33d4d7940f9a4dfb_dfusion%20logo%20.webp",
-      "banner": "https://cdn.prod.website-files.com/669ade140a683001b9f7fd78/68cebe9400e8d42c392200cd_dfusion%20ai%20background.webp",
-      "site_link": "https://x.com/dfusionai",
       "social_links": []
     }
   ]
