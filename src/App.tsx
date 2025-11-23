@@ -221,31 +221,31 @@ function App() {
     if (!ecoCategories || allProjects.length === 0) return []
 
     return ecoCategories.categories.map((categoryName) => {
-  const categoryId = categoryName.toLowerCase().replace(/\s+/g, '-')
+      const categoryId = categoryName.toLowerCase().replace(/\s+/g, '-')
       const categoryProjects = allProjects.filter((proj) =>
-    proj.categories.includes(categoryName),
-  )
+        proj.categories.includes(categoryName),
+      )
 
-  const positions = generatePositions(categoryProjects.length)
+      const positions = generatePositions(categoryProjects.length)
 
-  return {
-    id: categoryId,
-    name: categoryName,
-    projects: categoryProjects.map((proj, index) => ({
+      return {
+        id: categoryId,
+        name: categoryName,
+        projects: categoryProjects.map((proj, index) => ({
           id: proj.id,
-      name: proj.name,
-      description: proj.description,
-      categories: proj.categories,
-      logo: proj.logo,
+          name: proj.name,
+          description: proj.description,
+          categories: proj.categories,
+          logo: proj.logo,
           banner: proj.banner || '',
           site_link: proj.site_link || null,
           social_links: proj.social_links || [],
           addresses: proj.addresses,
           links: proj.links,
-      position: positions[index],
-    })),
-  }
-})
+          position: positions[index],
+        })),
+      }
+    })
   }, [allProjects, ecoCategories])
   const containerRef = useRef<HTMLDivElement>(null)
   const categoryButtonsRef = useRef<HTMLDivElement>(null)
@@ -281,9 +281,14 @@ function App() {
 
   // Use refs to store callbacks so they don't cause scene recreation
   const categoriesRef = useRef<Category[]>([])
+  const modalVisibleRef = useRef(false)
+  const isClosingModalRef = useRef(false)
   useEffect(() => {
     categoriesRef.current = categories
   }, [categories])
+  useEffect(() => {
+    modalVisibleRef.current = modalVisible
+  }, [modalVisible])
 
   // Handle hotspot hover for tooltip
   const handleHotspotHover = useCallback(
@@ -295,6 +300,13 @@ function App() {
 
   // Handle hotspot click - use ref to avoid recreating scene
   const handleHotspotClick = useCallback((hotspotId: string) => {
+    // If modal is closing or already open, just close it (prevents opening new modal when clicking outside)
+    if (isClosingModalRef.current || modalVisibleRef.current) {
+      setModalVisible(false)
+      setSelectedHotspotId(null)
+      return
+    }
+
     // Use ref to get current categories without causing dependency changes
     const currentCategories = categoriesRef.current
     let projectData = null
@@ -316,29 +328,29 @@ function App() {
       }
     }
 
-      if (!projectData) return
+    if (!projectData) return
 
-      setSelectedHotspotId((prevId) => {
-        // If clicking the same hotspot, close the modal
-        if (prevId === hotspotId) {
-          setModalVisible(false)
-          return null
-        }
-        // Otherwise, show/update the modal
-        setModalData({
-          title: projectData.name,
-          text: projectData.description,
-          logo: projectData.logo,
-          banner: projectData.banner,
-          siteLink: projectData.siteLink,
-          socialLinks: projectData.socialLinks,
+    setSelectedHotspotId((prevId) => {
+      // If clicking the same hotspot, close the modal
+      if (prevId === hotspotId) {
+        setModalVisible(false)
+        return null
+      }
+      // Otherwise, show/update the modal
+      setModalData({
+        title: projectData.name,
+        text: projectData.description,
+        logo: projectData.logo,
+        banner: projectData.banner,
+        siteLink: projectData.siteLink,
+        socialLinks: projectData.socialLinks,
         addresses: projectData.addresses,
         links: projectData.links,
-        })
-        setModalVisible(true)
-        return hotspotId
       })
-  }, []) // Empty deps - uses ref instead
+      setModalVisible(true)
+      return hotspotId
+    })
+  }, []) // Empty deps - uses refs instead
 
   // Three.js scene setup
   const {
@@ -432,13 +444,18 @@ function App() {
         onNetworkChange={setNetwork}
         showNetworkToggle={!selectedCategory}
       />
-      <div ref={containerRef} />
-      {isDataReady && (
-      <CategoryButtons
-        ref={categoryButtonsRef}
-        categories={categories}
-        onSelect={handleCategorySelect}
+      <div
+        ref={containerRef}
+        style={{
+          pointerEvents: modalVisible ? 'none' : 'auto',
+        }}
       />
+      {isDataReady && (
+        <CategoryButtons
+          ref={categoryButtonsRef}
+          categories={categories}
+          onSelect={handleCategorySelect}
+        />
       )}
       {selectedCategory && <ControlsHint onBack={handleBackToCategories} />}
       {hoveredProject && !modalVisible && (
@@ -459,11 +476,16 @@ function App() {
         addresses={modalData.addresses}
         links={modalData.links}
         onClose={() => {
+          isClosingModalRef.current = true
           setModalVisible(false)
           setSelectedHotspotId(null)
           if (selectedHotspotIdRef) {
             selectedHotspotIdRef.current = null
           }
+          // Reset the flag after a short delay to allow hotspot clicks again
+          setTimeout(() => {
+            isClosingModalRef.current = false
+          }, 100)
         }}
       />
     </>

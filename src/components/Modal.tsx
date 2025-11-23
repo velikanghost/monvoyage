@@ -102,6 +102,29 @@ export function Modal({
 
   return (
     <>
+      {/* Backdrop with blur */}
+      {visible && (
+        <div
+          className="fixed inset-0 z-20 transition-opacity duration-300"
+          style={{
+            backgroundColor: 'rgba(0, 0, 0, 0.1)',
+            backdropFilter: 'blur(2px)',
+            WebkitBackdropFilter: 'blur(2px)',
+            top: '64px', // Start below navbar
+            pointerEvents: 'auto',
+          }}
+          onClick={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+            onClose()
+          }}
+          onMouseDown={(e) => {
+            e.preventDefault()
+            e.stopPropagation()
+          }}
+        />
+      )}
+
       {/* Drawer */}
       <div
         className={`fixed right-0 w-1/3 z-30 transform transition-transform duration-300 ease-in-out shadow-2xl flex flex-col ${
