@@ -10,7 +10,7 @@ import {
   Link as LinkIcon,
 } from 'lucide-react'
 import { useThemeStore, themeColors } from '../stores/themeStore'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface ModalProps {
   visible: boolean
@@ -88,11 +88,23 @@ export function Modal({
     return `${address.slice(0, 6)}...${address.slice(-4)}`
   }
 
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (visible) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [visible])
+
   return (
     <>
       {/* Drawer */}
       <div
-        className={`fixed right-0 w-1/3 z-30 transform transition-transform duration-300 ease-in-out shadow-2xl ${
+        className={`fixed right-0 w-1/3 z-30 transform transition-transform duration-300 ease-in-out shadow-2xl flex flex-col ${
           visible ? 'translate-x-0' : 'translate-x-full'
         }`}
         style={{
@@ -101,8 +113,16 @@ export function Modal({
           backgroundColor: theme === 'light' ? '#ffffff' : '#141419',
           color: colors.text,
         }}
+        onWheel={(e) => {
+          // Stop scroll propagation to background
+          e.stopPropagation()
+        }}
+        onTouchMove={(e) => {
+          // Stop touch scroll propagation to background
+          e.stopPropagation()
+        }}
       >
-        <div className="flex items-center justify-end p-4">
+        <div className="flex items-center justify-end p-4 shrink-0">
           <X
             onClick={onClose}
             className="transition-colors bg-transparent border-none cursor-pointer z-10 size-6"
@@ -120,7 +140,10 @@ export function Modal({
         </div>
 
         {/* Content container with padding and scroll */}
-        <div className="h-full overflow-y-auto p-6 pt-0">
+        <div
+          className="flex-1 overflow-y-auto p-6 pt-0"
+          style={{ overscrollBehavior: 'contain' }}
+        >
           {banner && (
             <img
               src={banner}
