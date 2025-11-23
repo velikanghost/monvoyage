@@ -32,6 +32,8 @@ interface Project {
   banner: string
   site_link: string | null
   social_links: string[]
+  addresses?: Record<string, string>
+  links?: Record<string, string>
   position: THREE.Vector3
 }
 
@@ -219,29 +221,31 @@ function App() {
     if (!ecoCategories || allProjects.length === 0) return []
 
     return ecoCategories.categories.map((categoryName) => {
-      const categoryId = categoryName.toLowerCase().replace(/\s+/g, '-')
+  const categoryId = categoryName.toLowerCase().replace(/\s+/g, '-')
       const categoryProjects = allProjects.filter((proj) =>
-        proj.categories.includes(categoryName),
-      )
+    proj.categories.includes(categoryName),
+  )
 
-      const positions = generatePositions(categoryProjects.length)
+  const positions = generatePositions(categoryProjects.length)
 
-      return {
-        id: categoryId,
-        name: categoryName,
-        projects: categoryProjects.map((proj, index) => ({
+  return {
+    id: categoryId,
+    name: categoryName,
+    projects: categoryProjects.map((proj, index) => ({
           id: proj.id,
-          name: proj.name,
-          description: proj.description,
-          categories: proj.categories,
-          logo: proj.logo,
+      name: proj.name,
+      description: proj.description,
+      categories: proj.categories,
+      logo: proj.logo,
           banner: proj.banner || '',
           site_link: proj.site_link || null,
           social_links: proj.social_links || [],
-          position: positions[index],
-        })),
-      }
-    })
+          addresses: proj.addresses,
+          links: proj.links,
+      position: positions[index],
+    })),
+  }
+})
   }, [allProjects, ecoCategories])
   const containerRef = useRef<HTMLDivElement>(null)
   const categoryButtonsRef = useRef<HTMLDivElement>(null)
@@ -259,6 +263,8 @@ function App() {
     banner?: string
     siteLink?: string | null
     socialLinks?: string[]
+    addresses?: Record<string, string>
+    links?: Record<string, string>
   }>({
     title: 'Project',
     text: 'Description goes here.',
@@ -303,31 +309,35 @@ function App() {
           banner: project.banner,
           siteLink: project.site_link,
           socialLinks: project.social_links,
+          addresses: project.addresses,
+          links: project.links,
         }
         break
       }
     }
 
-    if (!projectData) return
+      if (!projectData) return
 
-    setSelectedHotspotId((prevId) => {
-      // If clicking the same hotspot, close the modal
-      if (prevId === hotspotId) {
-        setModalVisible(false)
-        return null
-      }
-      // Otherwise, show/update the modal
-      setModalData({
-        title: projectData.name,
-        text: projectData.description,
-        logo: projectData.logo,
-        banner: projectData.banner,
-        siteLink: projectData.siteLink,
-        socialLinks: projectData.socialLinks,
+      setSelectedHotspotId((prevId) => {
+        // If clicking the same hotspot, close the modal
+        if (prevId === hotspotId) {
+          setModalVisible(false)
+          return null
+        }
+        // Otherwise, show/update the modal
+        setModalData({
+          title: projectData.name,
+          text: projectData.description,
+          logo: projectData.logo,
+          banner: projectData.banner,
+          siteLink: projectData.siteLink,
+          socialLinks: projectData.socialLinks,
+        addresses: projectData.addresses,
+        links: projectData.links,
+        })
+        setModalVisible(true)
+        return hotspotId
       })
-      setModalVisible(true)
-      return hotspotId
-    })
   }, []) // Empty deps - uses ref instead
 
   // Three.js scene setup
@@ -424,11 +434,11 @@ function App() {
       />
       <div ref={containerRef} />
       {isDataReady && (
-        <CategoryButtons
-          ref={categoryButtonsRef}
-          categories={categories}
-          onSelect={handleCategorySelect}
-        />
+      <CategoryButtons
+        ref={categoryButtonsRef}
+        categories={categories}
+        onSelect={handleCategorySelect}
+      />
       )}
       {selectedCategory && <ControlsHint onBack={handleBackToCategories} />}
       {hoveredProject && !modalVisible && (
@@ -446,6 +456,8 @@ function App() {
         banner={modalData.banner}
         siteLink={modalData.siteLink}
         socialLinks={modalData.socialLinks}
+        addresses={modalData.addresses}
+        links={modalData.links}
         onClose={() => {
           setModalVisible(false)
           setSelectedHotspotId(null)
