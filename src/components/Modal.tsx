@@ -10,6 +10,7 @@ import {
   Link as LinkIcon,
 } from 'lucide-react'
 import { useThemeStore, themeColors } from '../stores/themeStore'
+import type { Network } from '../services/generateEcoCategories'
 import { useState, useEffect } from 'react'
 
 interface ModalProps {
@@ -22,6 +23,7 @@ interface ModalProps {
   socialLinks?: string[]
   addresses?: Record<string, string>
   links?: Record<string, string>
+  network: Network
   onClose: () => void
 }
 
@@ -35,11 +37,17 @@ export function Modal({
   socialLinks = [],
   addresses = {},
   links = {},
+  network,
   onClose,
 }: ModalProps) {
   const { theme } = useThemeStore()
   const colors = themeColors[theme]
   const [copiedAddress, setCopiedAddress] = useState<string | null>(null)
+  const explorerBaseByNetwork: Record<Network, string> = {
+    mainnet: 'https://monadscan.com/address/',
+    testnet: 'https://testnet.monadvision.com/address/',
+  }
+  const explorerBase = explorerBaseByNetwork[network]
 
   const copyToClipboard = async (text: string, key: string) => {
     try {
@@ -235,14 +243,16 @@ export function Modal({
                       >
                         {contractName}
                       </div>
-                      <div className="flex items-center gap-2">
-                        <span
-                          className="text-sm font-mono"
-                          style={{ color: colors.text }}
-                        >
-                          {formatAddress(address)}
-                        </span>
-                      </div>
+                      <a
+                        href={`${explorerBase}${address}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-sm font-mono no-underline"
+                        style={{ color: colors.text }}
+                      >
+                        {formatAddress(address)}
+                        <ExternalLink className="w-3 h-3 opacity-70" />
+                      </a>
                     </div>
                     <button
                       onClick={() => copyToClipboard(address, contractName)}
