@@ -475,6 +475,7 @@ function App() {
         socialLinks={modalData.socialLinks}
         addresses={modalData.addresses}
         links={modalData.links}
+        network={network}
         onClose={() => {
           isClosingModalRef.current = true
           setModalVisible(false)
